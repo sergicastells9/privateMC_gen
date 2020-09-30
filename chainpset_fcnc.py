@@ -122,10 +122,10 @@ def runall(special_dir, tag, total_nevents, events_per_output, config):
     StatsParser(data=total_summary, webdir="~/public_html/dump/metis/").do()
     time.sleep(600)
 
-runall("miniaod_runII", "ST_HAD_HUT_2016_20200522_v1", 1000000, 200, st_had_hut_2016)
-runall("miniaod_runII", "ST_HAD_HCT_2016_20200522_v1", 1000000, 200, st_had_hct_2016)
-runall("miniaod_runII", "TT_T2HJ_HAD_HUT_2018_20200522_v1", 1000000, 200, tt_t2HJ_had_hut_2018)
-#runall("miniaod_runII", "TT_T2HJ_HAD_HCT_2018_20200522_v1", 1000000, 200, tt_t2HJ_had_hct_2018)
+#runall("miniaod_runII", "ST_HAD_HUT_2016_20200522_v1", 1000000, 200, st_had_hut_2016)
+#runall("miniaod_runII", "ST_HAD_HCT_2016_20200522_v1", 1000000, 200, st_had_hct_2016)
+#runall("miniaod_runII", "TT_T2HJ_HAD_HUT_2018_20200522_v1", 1000000, 200, tt_t2HJ_had_hut_2018)
+runall("miniaod_runII", "TT_T2HJ_HAD_HCT_2018_20200522_v1", 1000000, 200, tt_t2HJ_had_hct_2018)
 #runall("miniaod_runII", "TT_aT2HJ_HAD_HUT_2018_20200522_v1", 1000000, 200, tt_at2HJ_had_hut_2018)
 #runall("miniaod_runII", "TT_aT2HJ_HAD_HCT_2018_20200522_v1", 1000000, 200, tt_at2HJ_had_hct_2018)
 
