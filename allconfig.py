@@ -93,3 +93,20 @@ tt_at2HJ_had_hct_2018 = {
 "pset_miniaodsim": "TOP-RunIIAutumn18MiniAOD-00188_1_cfg.py",
 "scram_arch_miniaodsim": "slc6_amd64_gcc700"
 }
+
+
+HHggtautau_2018 = {
+"cmssw_v_gensim": "CMSSW_10_2_6",
+"pset_gensim": "HIG-RunIIFall18wmLHEGS-00737_1_cfg_HHggtautau.py",
+"scram_arch_gensim": "slc6_amd64_gcc700",
+
+"cmssw_v_aodsim": "CMSSW_10_2_5",
+"pset_aodsim": "HIG-RunIIAutumn18DRPremix-00658_1_cfg_HHggtautau.py",
+"scram_arch_aodsim": "slc6_amd64_gcc700",
+
+"pset_aodsim2": "HIG-RunIIAutumn18DRPremix-00658_2_cfg_HHggtautau.py",
+
+"cmssw_v_miniaodsim": "CMSSW_10_2_5",
+"pset_miniaodsim": "HIG-RunIIAutumn18MiniAOD-00658_1_cfg_HHggtautau.py",
+"scram_arch_miniaodsim": "slc6_amd64_gcc700"
+}
