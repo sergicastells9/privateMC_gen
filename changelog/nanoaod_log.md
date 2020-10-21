@@ -16,3 +16,23 @@
             'ResonanceDecayFilter:daughters = 22,22,15,15'
         ),
 ```
+
+## the following MC samples are based on miniAOD used in ttH paper (HIG-19-013)
+
+### pset used for nanoAOD generation is copied from these 3 examples for each year
+- 2016:
+
+```
+    /ZGTo2LG_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16NanoAODv7-PUMoriond17_Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/NANOAODSIM
+
+```
+- 2017:
+
+```
+    /ZGToLLG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+```
+- 2018:
+
+```
+    /ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+```
