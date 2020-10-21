@@ -16,7 +16,7 @@ parser.add_argument("--skip_local", help = "don't submit jobs for local samples"
 parser.add_argument("--skip_central", help = "don't submit jobs for central samples", action = "store_true")
 args = parser.parse_args()
 
-job_dir = "miniaod_runII/test_metis/"
+job_dir = "nanoaod_runII/HHggtautau/"
 job_tag = args.tag
 hadoop_path = "{0}".format(job_dir)
 
@@ -26,7 +26,7 @@ DOSKIM = False
 
 #exec_path = "condor_exe_%s.sh" % args.tag
 exec_path = "condor_exe.sh"
-tar_path = "nanoAOD_package_%s.tar.gz" % args.tag
+#tar_path = "nanoAOD_package_%s.tar.gz" % args.tag
 
 if not args.soft_rerun:
     os.system("rm -rf tasks/*" + args.tag + "*")
@@ -55,37 +55,15 @@ def getArgs(pid, dataset, json):
     return args
 
 dsdefs = []
-
-'''
-these are useful when producing microaod from central miniaod
-
-conds_dict = {
-	"datasets_RunIISummer16.json" : "MetaData/data/MetaConditions/Era2016_RR-17Jul2018_v1.json",
-	"datasets_RunIIFall17.json" : "MetaData/data/MetaConditions/Era2017_RR-31Mar2018_v1.json",
-	"datasets_RunIIAutumn18.json" : "MetaData/data/MetaConditions/Era2018_RR-17Sep2018_v1.json", 
-    "datasets_short.json" : "MetaData/data/MetaConditions/Era2017_RR-31Mar2018_v1.json",
-    "datasets_RunIISummer16_22May2020.json" : "MetaData/data/MetaConditions/Era2016_RR-17Jul2018_v1.json",
-    "datasets_RunIIFall17_22May2020.json" : "MetaData/data/MetaConditions/Era2017_RR-31Mar2018_v1.json",
-    "datasets_RunIIAutumn18_22May2020.json" : "MetaData/data/MetaConditions/Era2018_RR-17Sep2018_v1.json"
-}
-
-job_jsons = ["datasets_RunIISummer16_22May2020.json", "datasets_RunIIFall17_22May2020.json", "datasets_RunIIAutumn18_22May2020.json"]
-
-if not args.skip_central:
-    for js in job_jsons:
-        jobs = json.load(open(js))
-        for pid in jobs["processes"]:
-            fpo = jobs["processes"][pid]["filesPerOutput"]
-            for ds in jobs["processes"][pid]["datasets"]:
-                argus = getArgs(pid, ds, conds_dict[js])                
-                print argus
-                dsdefs.append((ds, fpo, argus))
-'''
+dsdefs.append( ("/ZGToLLG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext1-v2/MINIAODSIM", 1, "") )
+# pid: sig_fcnc, sth user defined, just a tag
+# ds: xxx miniaodsim, a path in das or dis
+# fpo: files per output
 local_sets = []
 
 if not args.skip_local:
     local_sets = [
-        ("test_mking_nano", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggtautau_2018_20200930_v1_STEP4_v1/", 10, "")
+        ("HHggtautau_Era2018_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggtautau_2018_20201002_v1_STEP4_v1/", 10, "")
     ]
 
 
@@ -94,28 +72,28 @@ while True:
     allcomplete = True
 
     # Loop through central samples
-    #for ds,fpo,args in dsdefs[:]:
-    #    
-    #    sample = DBSSample( dataset=ds )
-    #    print(ds, args)
+    for ds,fpo,args in dsdefs[:]:
+        
+        sample = DBSSample( dataset=ds )
+        print(ds, args)
 
-    #    task = CondorTask(
-    #            sample = sample,
-    #            open_dataset = False,
-    #            files_per_output = fpo,
-    #            output_name = "test_skim.root" if DOSKIM else "myMicroAODOutputFile.root",
-    #            tag = job_tag,
-    #    		cmssw_version = cmssw_ver,
-    #            executable = exec_path,
-    #            tarfile = "empty",
-    #            condor_submit_params = {"sites" : "T2_US_UCSD,T2_US_CALTECH,T2_US_MIT,T2_US_WISCONSIN,T2_US_Nebraska,T2_US_Purdue,T2_US_Vanderbilt,T2_US_Florida"},
-    #            special_dir = hadoop_path,
-    #            arguments = args.replace(" ","|")
-    #            )
-    #    task.process()
-    #    allcomplete = allcomplete and task.complete()
-    #    # save some information for the dashboard
-    #    total_summary[ds] = task.get_task_summary()
+        task = CondorTask(
+                sample = sample,
+                open_dataset = False,
+                files_per_output = fpo,
+                output_name = "test_nanoaod.root",
+                tag = job_tag,
+        	cmssw_version = cmssw_ver,
+                executable = exec_path,
+                tarfile = "./package.tar.gz",
+                condor_submit_params = {"sites" : "T2_US_UCSD,T2_US_CALTECH,T2_US_MIT,T2_US_WISCONSIN,T2_US_Nebraska,T2_US_Purdue,T2_US_Vanderbilt,T2_US_Florida"},
+                special_dir = hadoop_path,
+                arguments = args.replace(" ","|")
+                )
+        task.process()
+        allcomplete = allcomplete and task.complete()
+        # save some information for the dashboard
+        total_summary[ds] = task.get_task_summary()
 
     # Loop through local samples
     for ds,loc,fpo,args in local_sets[:]:
@@ -147,8 +125,8 @@ while True:
 
 
     # parse the total summary and write out the dashboard
-    StatsParser(data=total_summary, webdir="~/public_html/dump/metis_nanoaod_fcnc/").do()
-    os.system("chmod -R 755 ~/public_html/dump/metis_nanoaod_fcnc")
+    StatsParser(data=total_summary, webdir="~/public_html/dump/metis_nanoaod/").do()
+    os.system("chmod -R 755 ~/public_html/dump/metis_nanoaod")
     if allcomplete:
         print ""
         print "Job={} finished".format(job_tag)
