@@ -4,6 +4,7 @@
 - based on signal sample used in HIG-19-018 (HH->bbgammagamma)
 - change to the following block in pythia setting:
 
+```
     processParameters = cms.vstring(
             '25:m0 = 125.0',
             '25:onMode = off',
@@ -14,3 +15,4 @@
             'ResonanceDecayFilter:mothers = 25',
             'ResonanceDecayFilter:daughters = 22,22,15,15'
         ),
+```
