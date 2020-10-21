@@ -1,1 +1,9 @@
 CMSSW_*
+*.json
+tasks/
+example/
+gridpacks/
+mergedNanoAOD/
+*tar.gz
+*.log
+*pyc
