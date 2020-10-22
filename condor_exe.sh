@@ -39,17 +39,53 @@ scramv1 b ProjectRename
 scram b -j3
 eval `scramv1 runtime -sh`
 
+cmssw_cfg="template.py"
 
+if [[ $ARGS == *"2016MC"* ]]
+then
+
+    cmssw_cfg="NanoAODCFG_2016MC.py"
+
+elif [[  $ARGS == *"2017MC"*  ]]
+then 
+
+    cmssw_cfg="NanoAODCFG_2017MC.py"
+
+elif [[  $ARGS == *"2018MC"*  ]]
+then 
+
+    cmssw_cfg="NanoAODCFG_2018MC.py"
+
+elif [[  $ARGS == *"2016Data"*  ]]
+then 
+
+    cmssw_cfg="NanoAODCFG_2016Data.py"
+elif [[  $ARGS == *"2017Data"*  ]]
+then 
+
+    cmssw_cfg="NanoAODCFG_2017Data.py"
+elif [[  $ARGS == *"2018Data"*  ]]
+then 
+
+    cmssw_cfg="NanoAODCFG_2018Data.py"
+else
+    echo "Don't know which cmssw cfg to use, check ARGS!!"
+fi
+
+# update input file
 echo "process.source = cms.Source(\"PoolSource\",
 fileNames=cms.untracked.vstring(\"${INPUTFILENAMES}\".replace('/hadoop', 'file:/hadoop').split(\",\"))
 )
 
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32( -1 ) )
-" >> HIG-RunIIAutumn18NanoAODv7-01134_1_cfg_template.py
+" >> $cmssw_cfg 
+#" >> HIG-RunIIAutumn18NanoAODv7-01134_1_cfg_template.py
 
 # Create tag file
-echo "[wrapper `date +\"%Y%m%d %k:%M:%S\"`] running: cmsRun HIG-RunIIAutumn18NanoAODv7-01134_1_cfg_template.py"
-cmsRun HIG-RunIIAutumn18NanoAODv7-01134_1_cfg_template.py 
+#echo "[wrapper `date +\"%Y%m%d %k:%M:%S\"`] running: cmsRun HIG-RunIIAutumn18NanoAODv7-01134_1_cfg_template.py"
+#cmsRun HIG-RunIIAutumn18NanoAODv7-01134_1_cfg_template.py 
+echo "[wrapper `date +\"%Y%m%d %k:%M:%S\"`] running: cmsRun "${cmssw_cfg}
+cmsRun ${cmssw_cfg} 
 
 if [ "$?" != "0" ]; then
     echo "Removing output file because cmsRun crashed with exit code $?"

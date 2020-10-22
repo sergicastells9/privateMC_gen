@@ -1,6 +1,7 @@
-# 20201021
+## 20201021
 
-## signal MC HH->gammgagammatautau privately produced
+1. Signal MC HH->gammgagammatautau privately produced
+
 - based on signal sample used in HIG-19-018 (HH->bbgammagamma)
 - change to the following block in pythia setting:
 
@@ -17,9 +18,10 @@
         ),
 ```
 
-## the following MC samples are based on miniAOD used in ttH paper (HIG-19-013)
+2. The following MC samples are based on miniAOD used in ttH paper (HIG-19-013)
 
-### pset used for nanoAOD generation is copied from these 3 examples for each year
+3. Psets used for nanoAOD generation are copied from these 3 examples for each year
+
 - 2016:
 
 ```

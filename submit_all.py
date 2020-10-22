@@ -11,13 +11,28 @@ from metis.StatsParser import StatsParser
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--tag", help = "tag to identify this set of babies", type=str)
+parser.add_argument("--filter", help = "only process mc/data with some requirement (e.g. 2016MC, 2017Data)", default="", type=str)
 parser.add_argument("--soft_rerun", help = "don't remake tarball", action="store_true")
 parser.add_argument("--skip_local", help = "don't submit jobs for local samples", action = "store_true")
 parser.add_argument("--skip_central", help = "don't submit jobs for central samples", action = "store_true")
 args = parser.parse_args()
 
+# for central inputs
+#dsdefs = []
+## datasetname, filesPerOutput, filtername
+from dsdefs_centralminiaod import dsdefs
+# for local inputs
+local_sets = []
+
+if not args.skip_local:
+    local_sets = [
+        ("HHggtautau_Era2018_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggtautau_2018_20201002_v1_STEP4_v1/", 10, "")
+    ]
+
+# some job configurations
 job_dir = "nanoaod_runII/HHggtautau/"
 job_tag = args.tag
+job_filter = args.filter
 hadoop_path = "{0}".format(job_dir)
 
 cmssw_ver = "CMSSW_10_2_22"
@@ -36,44 +51,13 @@ if not args.soft_rerun:
     #os.system("cp package.tar.gz /hadoop/cms/store/user/smay/FCNC/tarballs/%s" % tar_path)
     #os.system("hadoop fs -setrep -R 30 /cms/store/user/smay/FCNC/tarballs/%s" % tar_path)
 
-#with open("condor_exe.sh", "r") as f_in:
-#    lines = f_in.readlines()
-
-#with open(exec_path, "w") as f_out:
-#    for i in range(len(lines)):
-#        if "FIXME" in lines[i]:
-#            lines[i] = lines[i].replace("FIXME", tar_path)
-#    for line in lines:
-#        f_out.write(line)
-
-def getArgs(pid, dataset, json):
-    datasetName = dataset.split("/")[1]
-    if "EGamma" in datasetName:
-      datasetName += "_2018"
-    args = "processType={0} datasetName={1} conditionsJSON={2}".format(pid, datasetName, json)
-    args = args.replace("processType=sig_vh", "processType=AUTO")
-    return args
-
-dsdefs = []
-dsdefs.append( ("/ZGToLLG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext1-v2/MINIAODSIM", 1, "") )
-# pid: sig_fcnc, sth user defined, just a tag
-# ds: xxx miniaodsim, a path in das or dis
-# fpo: files per output
-local_sets = []
-
-if not args.skip_local:
-    local_sets = [
-        ("HHggtautau_Era2018_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggtautau_2018_20201002_v1_STEP4_v1/", 10, "")
-    ]
-
-
 total_summary = {}
 while True:
     allcomplete = True
 
     # Loop through central samples
     for ds,fpo,args in dsdefs[:]:
-        
+        if (job_filter != "") and (args not in job_filter) : continue         
         sample = DBSSample( dataset=ds )
         print(ds, args)
 
