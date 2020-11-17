@@ -12,6 +12,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--tag", help = "tag to identify this set of babies", type=str)
 parser.add_argument("--filter", help = "only process mc/data with some requirement (e.g. 2016MC, 2017Data)", default="", type=str)
+parser.add_argument("--dsfilter", help = "only process mc/data with some name pattern(e.g. DY***)", default="", type=str)
 parser.add_argument("--soft_rerun", help = "don't remake tarball", action="store_true")
 parser.add_argument("--skip_local", help = "don't submit jobs for local samples", action = "store_true")
 parser.add_argument("--skip_central", help = "don't submit jobs for central samples", action = "store_true")
@@ -24,15 +25,19 @@ from dsdefs_centralminiaod import dsdefs
 # for local inputs
 local_sets = []
 
+
 if not args.skip_local:
     local_sets = [
-        ("HHggtautau_Era2018_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggtautau_2018_20201002_v1_STEP4_v1/", 10, "")
+#        ("HHggtautau_Era2018_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggtautau_2018_20201002_v1_STEP4_v1/", 10, "2018MC"),
+        ("HHggtautau_Era2017_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggtautau_2017_20201025_v1_STEP4_v1/", 10, "2017MC")
     ]
 
 # some job configurations
 job_dir = "nanoaod_runII/HHggtautau/"
 job_tag = args.tag
 job_filter = args.filter
+ds_filter = args.dsfilter
+skip_central = args.skip_central
 hadoop_path = "{0}".format(job_dir)
 
 cmssw_ver = "CMSSW_10_2_22"
@@ -44,7 +49,7 @@ exec_path = "condor_exe.sh"
 #tar_path = "nanoAOD_package_%s.tar.gz" % args.tag
 
 if not args.soft_rerun:
-    os.system("rm -rf tasks/*" + args.tag + "*")
+#    os.system("rm -rf tasks/*" + args.tag + "*")
     os.system("rm package.tar.gz")
     os.system("XZ_OPT='-3e -T24' tar -Jc --exclude='.git' --exclude='*.root' --exclude='*.tar*' --exclude='*.out' --exclude='*.err' --exclude='*.log' --exclude '*.nfs*' -f package.tar.gz %s" % cmssw_ver)
 
@@ -57,7 +62,9 @@ while True:
 
     # Loop through central samples
     for ds,fpo,args in dsdefs[:]:
+        if skip_central: continue
         if (job_filter != "") and (args not in job_filter) : continue         
+        if (ds_filter != "") and (ds_filter not in ds) : continue         
         sample = DBSSample( dataset=ds )
         print(ds, args)
 
@@ -70,7 +77,8 @@ while True:
         	cmssw_version = cmssw_ver,
                 executable = exec_path,
                 tarfile = "./package.tar.gz",
-                condor_submit_params = {"sites" : "T2_US_UCSD,T2_US_CALTECH,T2_US_MIT,T2_US_WISCONSIN,T2_US_Nebraska,T2_US_Purdue,T2_US_Vanderbilt,T2_US_Florida"},
+                condor_submit_params = {"sites" : "T2_US_UCSD"},
+                #condor_submit_params = {"sites" : "T2_US_UCSD,T2_US_CALTECH,T2_US_MIT,T2_US_WISCONSIN,T2_US_Nebraska,T2_US_Purdue,T2_US_Vanderbilt,T2_US_Florida"},
                 special_dir = hadoop_path,
                 arguments = args.replace(" ","|")
                 )
@@ -78,6 +86,8 @@ while True:
         allcomplete = allcomplete and task.complete()
         # save some information for the dashboard
         total_summary[ds] = task.get_task_summary()
+        with open("summary.json", "w") as f_out:
+            json.dump(total_summary, f_out, indent=4, sort_keys=True)
 
     # Loop through local samples
     for ds,loc,fpo,args in local_sets[:]:
@@ -104,7 +114,7 @@ while True:
         allcomplete = allcomplete and task.complete()
         # save some information for the dashboard
         total_summary[ds] = task.get_task_summary()
-        with open("summary_nanoaod.json", "w") as f_out:
+        with open("summary.json", "w") as f_out:
             json.dump(total_summary, f_out, indent=4, sort_keys=True)
 
 

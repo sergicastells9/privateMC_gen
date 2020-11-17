@@ -122,7 +122,7 @@ HHggtautau_2017 = {
 
 "pset_aodsim2": "HIG-RunIIFall17DRPremix-01682_2_cfg_HHggtautau_2017.py",
 
-"cmssw_v_miniaodsim": "slc6_amd64_gcc630",
+"cmssw_v_miniaodsim": "CMSSW_9_4_6_patch1",
 "pset_miniaodsim": "HIG-RunIIFall17MiniAODv2-01813_1_cfg_HHggtautau_2017.py",
 "scram_arch_miniaodsim": "slc6_amd64_gcc630"
 }
