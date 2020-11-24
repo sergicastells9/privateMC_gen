@@ -128,12 +128,13 @@ HHggtautau_2017 = {
 }
 
 HHggtautau_2016 = {
-"cmssw_v_lhe": "CMSSW_7_1_20",
-"pset_lhe": "HIG-RunIIWinter15wmLHE-00576_1_cfg_HHggtautau_2016.py",
-"scram_arch_lhe": "slc6_amd64_gcc481",
+#"cmssw_v_lhe": "CMSSW_7_1_20",
+#"pset_lhe": "HIG-RunIIWinter15wmLHE-00576_1_cfg_HHggtautau_2016.py",
+#"scram_arch_lhe": "slc6_amd64_gcc481",
 
-"cmssw_v_gensim": "CMSSW_7_1_20_patch2",
-"pset_gensim": "HIG-RunIISummer15GS-00976_1_cfg_HHggtautau_2016.py",
+"cmssw_v_gensim": "CMSSW_7_1_43",
+#"cmssw_v_gensim": "CMSSW_8_0_21",
+"pset_gensim": "HIG-RunIISummer15wmLHEGS-02729_1_cfg.py",
 "scram_arch_gensim": "slc6_amd64_gcc481",
 
 "cmssw_v_aodsim": "CMSSW_8_0_21",
