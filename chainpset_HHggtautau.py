@@ -189,32 +189,32 @@ def runall(special_dir, tags, total_nevents, events_per_output, configs):
 #runall("miniaod_runII", "TT_aT2HJ_HAD_HUT_2018_20200522_v1", 1000000, 200, tt_at2HJ_had_hut_2018)
 #runall("miniaod_runII", "TT_aT2HJ_HAD_HCT_2018_20200522_v1", 1000000, 200, tt_at2HJ_had_hct_2018)
 
-datetag = "20201124"
-pset_lhegensim = {
-        "HHggZZ_Era2016_" + datetag: "HIG-RunIISummer15wmLHEGS-04648_1_cfg_HHggZZ_2016.py",
-        "HHggZZ_Era2017_" + datetag: "HIG-RunIIFall17wmLHEGS-05503_1_cfg_HHggZZ_2017.py",
-        "HHggZZ_Era2018_" + datetag: "HIG-RunIIFall18wmLHEGS-04568_1_cfg_HHggZZ_2018.py"
-        #"ZAA_Era2016_" + datetag: "SMP-RunIISummer15wmLHEGS-00020_1_cfg.py",
-        #"ZAA_Era2017_" + datetag: "SMP-RunIIFall17wmLHEGS-00030_1_cfg.py",
-        #"ZAA_Era2018_" + datetag: "SMP-RunIIFall18wmLHEGS-00239_1_cfg.py"
-        }
+#datetag = "20201124"
+#pset_lhegensim = {
+#        "HHggZZ_Era2016_" + datetag: "HIG-RunIISummer15wmLHEGS-04648_1_cfg_HHggZZ_2016.py",
+#        "HHggZZ_Era2017_" + datetag: "HIG-RunIIFall17wmLHEGS-05503_1_cfg_HHggZZ_2017.py",
+#        "HHggZZ_Era2018_" + datetag: "HIG-RunIIFall18wmLHEGS-04568_1_cfg_HHggZZ_2018.py"
+#        #"ZAA_Era2016_" + datetag: "SMP-RunIISummer15wmLHEGS-00020_1_cfg.py",
+#        #"ZAA_Era2017_" + datetag: "SMP-RunIIFall17wmLHEGS-00030_1_cfg.py",
+#        #"ZAA_Era2018_" + datetag: "SMP-RunIIFall18wmLHEGS-00239_1_cfg.py"
+#        }
+#
+#tags = []
+#configs = []
+#
+#for key, value in pset_lhegensim.items():
+#    tags.append(key)
+#    config = {}
+#    if "Era2016" in key:
+#        config = config_2016
+#    if "Era2017" in key:
+#        config = config_2017
+#    if "Era2018" in key:
+#        config = config_2018
+#    config["pset_gensim"] = value
+#    configs.append(config)
 
-tags = []
-configs = []
-
-for key, value in pset_lhegensim.items():
-    tags.append(key)
-    config = {}
-    if "Era2016" in key:
-        config = config_2016
-    if "Era2017" in key:
-        config = config_2017
-    if "Era2018" in key:
-        config = config_2018
-    config["pset_gensim"] = value
-    configs.append(config)
-
-#runall("miniaod_runII", "HHggtautau_2017_20201025_v1", 1000000, 200, HHggtautau_2017)
+runall("miniaod_runII", "HHggtautau_2017_20201025_v1", 1000000, 200, HHggtautau_2017)
 #runall("miniaod_runII", "HHggtautau_2016_20201124_v1", 1000000, 200, HHggtautau_2016)
 
-runall("miniaod_runII", tags, 1000000, 200, configs)
+#runall("miniaod_runII", tags, 1000000, 200, configs)
