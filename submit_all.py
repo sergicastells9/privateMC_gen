@@ -29,7 +29,11 @@ local_sets = []
 if not args.skip_local:
     local_sets = [
 #        ("HHggtautau_Era2018_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggtautau_2018_20201002_v1_STEP4_v1/", 10, "2018MC"),
-        ("HHggtautau_Era2017_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggtautau_2017_20201025_v1_STEP4_v1/", 10, "2017MC")
+#        ("HHggtautau_Era2017_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggtautau_2017_20201025_v1_STEP4_v1/", 10, "2017MC")
+#        ("HHggtautau_Era2016_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggtautau_2016_20201124_v1_STEP4_v1/", 10, "2016MC")
+        ("HHggZZ_Era2016_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggZZ_2016_20210209_v1_STEP4_v1/", 10, "2016MC"),
+        ("HHggZZ_Era2017_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggZZ_2017_20210209_v1_STEP4_v1/", 10, "2017MC"),
+        ("HHggZZ_Era2018_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggZZ_2018_20210209_v1_STEP4_v1/", 10, "2018MC")
     ]
 
 # some job configurations
@@ -77,7 +81,9 @@ while True:
         	cmssw_version = cmssw_ver,
                 executable = exec_path,
                 tarfile = "./package.tar.gz",
-                condor_submit_params = {"sites" : "T2_US_UCSD"},
+                condor_submit_params = {"sites" : "T2_US_UCSD",
+                    "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel6-m202006"]]},
+                    #"SingularityImage":"/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel6-m202006"},
                 #condor_submit_params = {"sites" : "T2_US_UCSD,T2_US_CALTECH,T2_US_MIT,T2_US_WISCONSIN,T2_US_Nebraska,T2_US_Purdue,T2_US_Vanderbilt,T2_US_Florida"},
                 special_dir = hadoop_path,
                 arguments = args.replace(" ","|")
@@ -106,7 +112,8 @@ while True:
                 cmssw_version = cmssw_ver,
                 executable = exec_path,
                 tarfile = "./package.tar.gz",
-                condor_submit_params = {"sites" : "T2_US_UCSD"},
+                condor_submit_params = {"sites" : "T2_US_UCSD",
+                    "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel6-m202006"]]},
                 special_dir = hadoop_path,
                 arguments = args.replace(" ","|")
         )

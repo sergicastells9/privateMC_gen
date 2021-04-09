@@ -191,9 +191,12 @@ def runall(special_dir, tags, total_nevents, events_per_output, configs):
 
 datetag = "20201124"
 pset_lhegensim = {
-        "ZAA_Era2016_" + datetag: "SMP-RunIISummer15wmLHEGS-00020_1_cfg.py",
-        "ZAA_Era2017_" + datetag: "SMP-RunIIFall17wmLHEGS-00030_1_cfg.py",
-        "ZAA_Era2018_" + datetag: "SMP-RunIIFall18wmLHEGS-00239_1_cfg.py"
+        "HHggZZ_Era2016_" + datetag: "HIG-RunIISummer15wmLHEGS-04648_1_cfg_HHggZZ_2016.py",
+        "HHggZZ_Era2017_" + datetag: "HIG-RunIIFall17wmLHEGS-05503_1_cfg_HHggZZ_2017.py",
+        "HHggZZ_Era2018_" + datetag: "HIG-RunIIFall18wmLHEGS-04568_1_cfg_HHggZZ_2018.py"
+        #"ZAA_Era2016_" + datetag: "SMP-RunIISummer15wmLHEGS-00020_1_cfg.py",
+        #"ZAA_Era2017_" + datetag: "SMP-RunIIFall17wmLHEGS-00030_1_cfg.py",
+        #"ZAA_Era2018_" + datetag: "SMP-RunIIFall18wmLHEGS-00239_1_cfg.py"
         }
 
 tags = []
