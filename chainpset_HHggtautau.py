@@ -59,15 +59,15 @@ config_2016 = {
 "scram_arch_miniaodsim": "slc6_amd64_gcc630"
 }
 
-#def runall(special_dir, tag, total_nevents, events_per_output, config):
-def runall(special_dir, tags, total_nevents, events_per_output, configs):
+def runall(special_dir, tag, total_nevents, events_per_output, config):
+#def runall(special_dir, tags, total_nevents, events_per_output, configs):
 
  for _ in range(2500):
 
-  for i in range(len(configs)):
-    config = configs[i]
+#  for i in range(len(configs)):
+#    config = configs[i]
 #    special_dir = special_dirs[i]
-    tag = tags[i]
+#    tag = tags[i]
 
     proc_tag = "v1"
     #special_dir = "workflowtest/ProjectMetis"
@@ -108,6 +108,8 @@ def runall(special_dir, tags, total_nevents, events_per_output, configs):
             pset = "psets/" + pset_gensim,
             cmssw_version = cmssw_v_gensim,
             scram_arch = scram_arch_gensim,
+            condor_submit_params = {"sites" : "T2_US_UCSD",
+                    "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel6-m202006"]]}
             )
 
     step2 = CMSSWTask(
@@ -122,6 +124,8 @@ def runall(special_dir, tags, total_nevents, events_per_output, configs):
             pset = "psets/" + pset_aodsim,
             cmssw_version = cmssw_v_aodsim,
             scram_arch = scram_arch_aodsim,
+            condor_submit_params = {"sites" : "T2_US_UCSD",
+                    "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel6-m202006"]]}
             )
 
     step3 = CMSSWTask(
@@ -136,6 +140,8 @@ def runall(special_dir, tags, total_nevents, events_per_output, configs):
             pset = "psets/" + pset_aodsim2,
             cmssw_version = cmssw_v_aodsim2,
             scram_arch = scram_arch_aodsim2,
+            condor_submit_params = {"sites" : "T2_US_UCSD",
+                    "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel6-m202006"]]}
             )
 
     step4 = CMSSWTask(
@@ -151,6 +157,8 @@ def runall(special_dir, tags, total_nevents, events_per_output, configs):
             pset = "psets/" + pset_miniaodsim,
             cmssw_version = cmssw_v_miniaodsim,
             scram_arch = scram_arch_miniaodsim,
+            condor_submit_params = {"sites" : "T2_US_UCSD",
+                    "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel6-m202006"]]}
             # condor_submit_params = {"sites":"UAF,UCSD"},
             )
     '''
@@ -180,7 +188,7 @@ def runall(special_dir, tags, total_nevents, events_per_output, configs):
         total_summary[task.get_sample().get_datasetname()] = summary
     StatsParser(data=total_summary, webdir="~/public_html/dump/metis/").do()
 
-  time.sleep(600)
+    time.sleep(2000)
 
 #runall("miniaod_runII", "ST_HAD_HUT_2016_20200522_v1", 1000000, 200, st_had_hut_2016)
 #runall("miniaod_runII", "ST_HAD_HCT_2016_20200522_v1", 1000000, 200, st_had_hct_2016)
@@ -214,7 +222,7 @@ def runall(special_dir, tags, total_nevents, events_per_output, configs):
 #    config["pset_gensim"] = value
 #    configs.append(config)
 
-runall("miniaod_runII", "HHggtautau_2017_20201025_v1", 1000000, 200, HHggtautau_2017)
+runall("miniaod_runII", "HHggtautau_2017_20210412_v1", 1000000, 200, HHggtautau_2017)
 #runall("miniaod_runII", "HHggtautau_2016_20201124_v1", 1000000, 200, HHggtautau_2016)
 
 #runall("miniaod_runII", tags, 1000000, 200, configs)
