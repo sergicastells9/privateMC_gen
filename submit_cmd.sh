@@ -15,8 +15,20 @@
 
 # this is for 3 years of ggWW
 #python submit_all.py --tag v0.6_20210210 --skip_local --dsfilter GluGluToHHTo2G2l2nu_node_SM
-python submit_all.py --tag v0.6_20210219 --skip_local --dsfilter GluGluToHHTo2G2Qlnu 
+#python submit_all.py --tag v0.6_20210219 --skip_local --dsfilter GluGluToHHTo2G2Qlnu 
 #python submit_all.py --tag v0.6_20210219 --skip_local --dsfilter GluGluToHHTo2B2G 
 
 # for 3 yeras of ggZZ
 #python submit_all.py --tag v0.6_20210216 --skip_central
+
+# for VBF and resonant HHggtautau
+#python submit_all.py --tag v0.1_20210502 --skip_central
+#python submit_all.py --tag v0.2_20210502 --skip_central --dsfilter radion
+
+#python submit_all.py --tag v0.1_addrawphopt_20210507 --skip_local --dsfilter 2018D 
+#python submit_all.py --tag v0.1_addrawphopt_20210506 --skip_local --dsfilter DYJetsToLL_M-50 
+#python submit_all.py --tag v0.1_addrawphopt_20210506 --skip_local --dsfilter ZGToLLG_01J_5f_TuneCP5 
+#python submit_all.py --tag v0.1_addrawphopt_20210506 --skip_local --dsfilter TTGJets_TuneCP5_13TeV 
+
+
+python submit_all.py --tag v0.2_nanoaodv8_20210510 --skip_local 

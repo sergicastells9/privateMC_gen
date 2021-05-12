@@ -21,7 +21,7 @@ args = parser.parse_args()
 # for central inputs
 #dsdefs = []
 ## datasetname, filesPerOutput, filtername
-from dsdefs_centralminiaod import dsdefs
+from dsdefs_centralminiaod_UL import dsdefs
 # for local inputs
 local_sets = []
 
@@ -31,9 +31,42 @@ if not args.skip_local:
 #        ("HHggtautau_Era2018_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggtautau_2018_20201002_v1_STEP4_v1/", 10, "2018MC"),
 #        ("HHggtautau_Era2017_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggtautau_2017_20201025_v1_STEP4_v1/", 10, "2017MC")
 #        ("HHggtautau_Era2016_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggtautau_2016_20201124_v1_STEP4_v1/", 10, "2016MC")
-        ("HHggZZ_Era2016_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggZZ_2016_20210209_v1_STEP4_v1/", 10, "2016MC"),
-        ("HHggZZ_Era2017_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggZZ_2017_20210209_v1_STEP4_v1/", 10, "2017MC"),
-        ("HHggZZ_Era2018_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggZZ_2018_20210209_v1_STEP4_v1/", 10, "2018MC")
+#        ("HHggZZ_Era2016_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggZZ_2016_20210209_v1_STEP4_v1/", 10, "2016MC"),
+#        ("HHggZZ_Era2017_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggZZ_2017_20210209_v1_STEP4_v1/", 10, "2017MC"),
+#        ("HHggZZ_Era2018_private", "/hadoop/cms/store/user/hmei/miniaod_runII/HHggZZ_2018_20210209_v1_STEP4_v1/", 10, "2018MC")
+        # vbf
+        ("VBF_CV_0_5_C2V_1_C3_1_HHggtautau_Era2016_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_0_5_C2V_1_C3_1_HHggtautau_2016_20210425_v1_STEP4_v1/", 10, "2016MC"),
+        ("VBF_CV_1_5_C2V_1_C3_1_HHggtautau_Era2016_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_5_C2V_1_C3_1_HHggtautau_2016_20210420_v1_STEP4_v1/", 10, "2016MC"),
+        ("VBF_CV_1_C2V_1_C3_0_HHggtautau_Era2016_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_1_C3_0_HHggtautau_2016_20210425_v1_STEP4_v1/", 10, "2016MC"),
+        ("VBF_CV_1_C2V_1_C3_2_HHggtautau_Era2016_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_1_C3_2_HHggtautau_2016_20210425_v1_STEP4_v1/", 10, "2016MC"),
+        ("VBF_CV_1_C2V_1_C3_1_HHggtautau_Era2016_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_1_C3_1_HHggtautau_2016_20210420_v1_STEP4_v1/", 10, "2016MC"),
+        ("VBF_CV_1_C2V_1_C3_1_HHggtautau_Era2016_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_0_C3_1_HHggtautau_2016_20210420_v1_STEP4_v1/", 10, "2016MC"),
+        ("VBF_CV_1_C2V_1_C3_1_HHggtautau_Era2016_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_2_C3_1_HHggtautau_2016_20210420_v1_STEP4_v1/", 10, "2016MC"),
+        ("VBF_CV_0_5_C2V_1_C3_1_HHggtautau_Era2017_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_0_5_C2V_1_C3_1_HHggtautau_2017_20210425_v1_STEP4_v1/", 10, "2017MC"),
+        ("VBF_CV_1_5_C2V_1_C3_1_HHggtautau_Era2017_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_5_C2V_1_C3_1_HHggtautau_2017_20210420_v1_STEP4_v1/", 10, "2017MC"),
+        ("VBF_CV_1_C2V_1_C3_0_HHggtautau_Era2017_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_1_C3_0_HHggtautau_2017_20210425_v1_STEP4_v1/", 10, "2017MC"),
+        ("VBF_CV_1_C2V_1_C3_2_HHggtautau_Era2017_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_1_C3_2_HHggtautau_2017_20210425_v1_STEP4_v1/", 10, "2017MC"),
+        ("VBF_CV_1_C2V_1_C3_1_HHggtautau_Era2017_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_1_C3_1_HHggtautau_2017_20210420_v1_STEP4_v1/", 10, "2017MC"),
+        ("VBF_CV_1_C2V_1_C3_1_HHggtautau_Era2017_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_0_C3_1_HHggtautau_2017_20210420_v1_STEP4_v1/", 10, "2017MC"),
+        ("VBF_CV_1_C2V_1_C3_1_HHggtautau_Era2017_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_2_C3_1_HHggtautau_2017_20210420_v1_STEP4_v1/", 10, "2017MC"),
+        ("VBF_CV_0_5_C2V_1_C3_1_HHggtautau_Era2018_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_0_5_C2V_1_C3_1_HHggtautau_2018_20210425_v1_STEP4_v1/", 10, "2018MC"),
+        ("VBF_CV_1_5_C2V_1_C3_1_HHggtautau_Era2018_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_5_C2V_1_C3_1_HHggtautau_2018_20210420_v1_STEP4_v1/", 10, "2018MC"),
+        ("VBF_CV_1_C2V_1_C3_0_HHggtautau_Era2018_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_1_C3_0_HHggtautau_2018_20210425_v1_STEP4_v1/", 10, "2018MC"),
+        ("VBF_CV_1_C2V_1_C3_2_HHggtautau_Era2018_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_1_C3_2_HHggtautau_2018_20210425_v1_STEP4_v1/", 10, "2018MC"),
+        ("VBF_CV_1_C2V_1_C3_1_HHggtautau_Era2018_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_1_C3_1_HHggtautau_2018_20210420_v1_STEP4_v1/", 10, "2018MC"),
+        ("VBF_CV_1_C2V_1_C3_1_HHggtautau_Era2018_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_2_C3_1_HHggtautau_2018_20210420_v1_STEP4_v1/", 10, "2018MC"),
+        ("VBF_CV_1_C2V_1_C3_1_HHggtautau_Era2018_private", "/hadoop/cms/store/user/fsetti/nanoAOD_runII/VBF_CV_1_C2V_0_C3_1_HHggtautau_2018_20210420_v1_STEP4_v1/", 10, "2018MC"),
+        ## resonant
+        ("radionM300_HHggtautau_Era2017_private", "/hadoop/cms/store/user/hmei/nanoAOD_runII/res_Radion_M300_HHggtautau_2017_20210422_v1_STEP4_v1/", 10, "2017MC"),
+        ("radionM400_HHggtautau_Era2017_private", "/hadoop/cms/store/user/hmei/nanoAOD_runII/res_Radion_M400_HHggtautau_2017_20210422_v1_STEP4_v1/", 10, "2017MC"),
+        ("radionM500_HHggtautau_Era2017_private", "/hadoop/cms/store/user/hmei/nanoAOD_runII/res_Radion_M500_HHggtautau_2017_20210422_v1_STEP4_v1/", 10, "2017MC"),
+        ("radionM800_HHggtautau_Era2017_private", "/hadoop/cms/store/user/hmei/nanoAOD_runII/res_Radion_M800_HHggtautau_2017_20210422_v1_STEP4_v1/", 10, "2017MC"),
+        ("radionM1000_HHggtautau_Era2017_private", "/hadoop/cms/store/user/hmei/nanoAOD_runII/res_Radion_M1000_HHggtautau_2017_20210422_v1_STEP4_v1/", 10, "2017MC"),
+        ("radionM300_HHggtautau_Era2018_private", "/hadoop/cms/store/user/hmei/nanoAOD_runII/res_Radion_M300_HHggtautau_2018_20210422_v1_STEP4_v1/", 10, "2018MC"),
+        ("radionM400_HHggtautau_Era2018_private", "/hadoop/cms/store/user/hmei/nanoAOD_runII/res_Radion_M400_HHggtautau_2018_20210422_v1_STEP4_v1/", 10, "2018MC"),
+        ("radionM500_HHggtautau_Era2018_private", "/hadoop/cms/store/user/hmei/nanoAOD_runII/res_Radion_M500_HHggtautau_2018_20210422_v1_STEP4_v1/", 10, "2018MC"),
+        ("radionM800_HHggtautau_Era2018_private", "/hadoop/cms/store/user/hmei/nanoAOD_runII/res_Radion_M800_HHggtautau_2018_20210422_v1_STEP4_v1/", 10, "2018MC"),
+        ("radionM1000_HHggtautau_Era2018_private", "/hadoop/cms/store/user/hmei/nanoAOD_runII/res_Radion_M1000_HHggtautau_2018_20210422_v1_STEP4_v1/", 10, "2018MC")
     ]
 
 # some job configurations
@@ -44,7 +77,8 @@ ds_filter = args.dsfilter
 skip_central = args.skip_central
 hadoop_path = "{0}".format(job_dir)
 
-cmssw_ver = "CMSSW_10_2_22"
+#cmssw_ver = "CMSSW_10_2_22"
+cmssw_ver = "CMSSW_10_6_20"
 
 DOSKIM = False 
 
@@ -82,7 +116,8 @@ while True:
                 executable = exec_path,
                 tarfile = "./package.tar.gz",
                 condor_submit_params = {"sites" : "T2_US_UCSD",
-                    "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel6-m202006"]]},
+                    #"classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel6-m202006"]]},
+                    "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel7-m202006"]]},
                     #"SingularityImage":"/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel6-m202006"},
                 #condor_submit_params = {"sites" : "T2_US_UCSD,T2_US_CALTECH,T2_US_MIT,T2_US_WISCONSIN,T2_US_Nebraska,T2_US_Purdue,T2_US_Vanderbilt,T2_US_Florida"},
                 special_dir = hadoop_path,
@@ -113,7 +148,8 @@ while True:
                 executable = exec_path,
                 tarfile = "./package.tar.gz",
                 condor_submit_params = {"sites" : "T2_US_UCSD",
-                    "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel6-m202006"]]},
+                    #"classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel6-m202006"]]},
+                    "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel7-m202006"]]},
                 special_dir = hadoop_path,
                 arguments = args.replace(" ","|")
         )
@@ -126,8 +162,8 @@ while True:
 
 
     # parse the total summary and write out the dashboard
-    StatsParser(data=total_summary, webdir="~/public_html/dump/metis_nanoaod/").do()
-    os.system("chmod -R 755 ~/public_html/dump/metis_nanoaod")
+    StatsParser(data=total_summary, webdir="~/public_html/dump/metis_nanoaod_v8/").do()
+    os.system("chmod -R 755 ~/public_html/dump/metis_nanoaod_v8")
     if allcomplete:
         print ""
         print "Job={} finished".format(job_tag)

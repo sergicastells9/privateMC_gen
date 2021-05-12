@@ -49,12 +49,14 @@ then
 elif [[  $ARGS == *"2017MC"*  ]]
 then 
 
-    cmssw_cfg="NanoAODCFG_2017MC.py"
+    #cmssw_cfg="NanoAODCFG_2017MC.py"
+    cmssw_cfg="NanoAODv2_cfg_2017MC_UL.py"
 
 elif [[  $ARGS == *"2018MC"*  ]]
 then 
 
-    cmssw_cfg="NanoAODCFG_2018MC.py"
+    #cmssw_cfg="NanoAODCFG_2018MC.py"
+    cmssw_cfg="NanoAODv2_cfg_2018MC_UL.py"
 
 elif [[  $ARGS == *"2016Data"*  ]]
 then 
@@ -63,11 +65,13 @@ then
 elif [[  $ARGS == *"2017Data"*  ]]
 then 
 
-    cmssw_cfg="NanoAODCFG_2017Data.py"
+    #cmssw_cfg="NanoAODCFG_2017Data.py"
+    cmssw_cfg="NanoAODv2_cfg_2017Data_UL.py"
 elif [[  $ARGS == *"2018Data"*  ]]
 then 
 
-    cmssw_cfg="NanoAODCFG_2018Data.py"
+    #cmssw_cfg="NanoAODCFG_2018Data.py"
+    cmssw_cfg="NanoAODv2_cfg_2018Data_UL.py"
 else
     echo "Don't know which cmssw cfg to use, check ARGS!!"
 fi
