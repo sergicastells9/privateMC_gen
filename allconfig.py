@@ -201,3 +201,446 @@ HHggZZ_2016 = {
 "pset_miniaodsim": "HIG-RunIISummer16MiniAODv3-03284_1_cfg_HHggtautau_2016.py",
 "scram_arch_miniaodsim": "slc6_amd64_gcc630"
 }
+
+NMSSM = {
+"cmssw_v_gensim": "CMSSW_10_2_6",
+"pset_gensim": "HIG-RunIIFall18wmLHEGS-00737_1_cfg_NMSSM.py",
+"scram_arch_gensim": "slc7_amd64_gcc700",
+
+"cmssw_v_aodsim": "CMSSW_10_2_5",
+"pset_aodsim": "HIG-RunIIAutumn18DRPremix-00658_1_cfg_HHggtautau.py",
+"scram_arch_aodsim": "slc6_amd64_gcc700",
+
+"pset_aodsim2": "HIG-RunIIAutumn18DRPremix-00658_2_cfg_HHggtautau.py",
+
+"cmssw_v_miniaodsim": "CMSSW_10_2_5",
+"pset_miniaodsim": "HIG-RunIIAutumn18MiniAOD-00658_1_cfg_HHggtautau.py",
+"scram_arch_miniaodsim": "slc6_amd64_gcc700"
+}
+
+signal_UL20 = {
+
+	"2016" : {
+		"cmssw_v_gen": "CMSSW_10_6_28_patch1",
+		"pset_gen": "HIG-RunIISummer20UL16wmLHEGEN-03485_1_cfg.py",
+		"scram_arch_gen": "slc7_amd64_gcc700",
+		
+		"cmssw_v_sim": "CMSSW_10_6_17_patch1",
+		"pset_sim": "HIG-RunIISummer20UL16SIM-01181_1_cfg.py",
+		"scram_arch_sim": "slc7_amd64_gcc700",
+		
+		"cmssw_v_mix": "CMSSW_10_6_17_patch1",
+		"pset_mix": "HIG-RunIISummer20UL16DIGIPremix-01176_1_cfg.py",
+		"scram_arch_mix": "slc7_amd64_gcc700",
+		
+		"cmssw_v_hlt": "CMSSW_8_0_33_UL",
+		"pset_hlt": "HIG-RunIISummer20UL16HLT-01181_1_cfg.py",
+		"scram_arch_hlt": "slc7_amd64_gcc530",
+		
+		"cmssw_v_reco": "CMSSW_10_6_17_patch1",
+		"pset_reco": "HIG-RunIISummer20UL16RECO-01181_1_cfg.py",
+		"scram_arch_reco": "slc7_amd64_gcc700",
+		
+		"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+		"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODv2-00913_1_cfg.py",
+		"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+
+		"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+		"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODv9-00891_1_cfg.py",
+		"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+	},
+
+	"2016_APV" : {
+		"cmssw_v_gen": "CMSSW_10_6_28_patch1",
+		"pset_gen": "HIG-RunIISummer20UL16wmLHEGENAPV-03182_1_cfg.py",
+		"scram_arch_gen": "slc7_amd64_gcc700",
+		
+		"cmssw_v_sim": "CMSSW_10_6_17_patch1",
+		"pset_sim": "HIG-RunIISummer20UL16SIMAPV-00895_1_cfg.py",
+		"scram_arch_sim": "slc7_amd64_gcc700",
+		
+		"cmssw_v_mix": "CMSSW_10_6_17_patch1",
+		"pset_mix": "HIG-RunIISummer20UL16DIGIPremixAPV-00874_1_cfg.py",
+		"scram_arch_mix": "slc7_amd64_gcc700",
+		
+		"cmssw_v_hlt": "CMSSW_8_0_33_UL",
+		"pset_hlt": "HIG-RunIISummer20UL16HLTAPV-00895_1_cfg.py",
+		"scram_arch_hlt": "slc7_amd64_gcc530",
+		
+		"cmssw_v_reco": "CMSSW_10_6_17_patch1",
+		"pset_reco": "HIG-RunIISummer20UL16RECOAPV-00895_1_cfg.py",
+		"scram_arch_reco": "slc7_amd64_gcc700",
+		
+		"cmssw_v_miniaodsim": "CMSSW_10_6_17_patch1",
+		"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODAPV-00895_1_cfg.py",
+		"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+
+		"cmssw_v_nanoaodsim": "CMSSW_10_6_19_patch2",
+		"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODAPVv2-00252_1_cfg.py",
+		"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+	},
+
+	"2017" : {
+		"cmssw_v_gen": "CMSSW_10_6_28_patch1",
+		"pset_gen": "HIG-RunIISummer20UL17wmLHEGEN-03413_1_cfg.py",
+		"scram_arch_gen": "slc7_amd64_gcc700",
+		
+		"cmssw_v_sim": "CMSSW_10_6_17_patch1",
+		"pset_sim": "HIG-RunIISummer20UL17SIM-01169_1_cfg.py",
+		"scram_arch_sim": "slc7_amd64_gcc700",
+		
+		"cmssw_v_mix": "CMSSW_10_6_17_patch1",
+		"pset_mix": "HIG-RunIISummer20UL17DIGIPremix-01169_1_cfg.py",
+		"scram_arch_mix": "slc7_amd64_gcc700",
+		
+		"cmssw_v_hlt": "CMSSW_9_4_14_UL_patch1",
+		"pset_hlt": "HIG-RunIISummer20UL17HLT-01169_1_cfg.py",
+		"scram_arch_hlt": "slc7_amd64_gcc630",
+		
+		"cmssw_v_reco": "CMSSW_10_6_17_patch1",
+		"pset_reco": "HIG-RunIISummer20UL17RECO-01169_1_cfg.py",
+		"scram_arch_reco": "slc7_amd64_gcc700",
+		
+		"cmssw_v_miniaodsim": "CMSSW_10_6_20",
+		"pset_miniaodsim": "HIG-RunIISummer20UL17MiniAODv2-00321_1_cfg.py",
+		"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+
+		"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+		"pset_nanoaodsim": "HIG-RunIISummer20UL17NanoAODv9-00304_1_cfg.py",
+		"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+	},
+
+	"2018" : {
+		"cmssw_v_gen": "CMSSW_10_6_28_patch1",
+		"pset_gen": "HIG-RunIISummer20UL18wmLHEGEN-03457_1_cfg.py",
+		"scram_arch_gen": "slc7_amd64_gcc700",
+		
+		"cmssw_v_sim": "CMSSW_10_6_17_patch1",
+		"pset_sim": "HIG-RunIISummer20UL18SIM-01221_1_cfg.py",
+		"scram_arch_sim": "slc7_amd64_gcc700",
+		
+		"cmssw_v_mix": "CMSSW_10_6_17_patch1",
+		"pset_mix": "HIG-RunIISummer20UL18DIGIPremix-01202_1_cfg.py",
+		"scram_arch_mix": "slc7_amd64_gcc700",
+		
+		"cmssw_v_hlt": "CMSSW_10_2_16_UL",
+		"pset_hlt": "HIG-RunIISummer20UL18HLT-01221_1_cfg.py",
+		"scram_arch_hlt": "slc7_amd64_gcc700",
+		
+		"cmssw_v_reco": "CMSSW_10_6_17_patch1",
+		"pset_reco": "HIG-RunIISummer20UL18RECO-01221_1_cfg.py",
+		"scram_arch_reco": "slc7_amd64_gcc700",
+		
+		"cmssw_v_miniaodsim": "CMSSW_10_6_20",
+		"pset_miniaodsim": "HIG-RunIISummer20UL18MiniAODv2-00478_1_cfg.py",
+		"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+
+		"cmssw_v_nanoaodsim": "CMSSW_10_6_5",
+		"pset_nanoaodsim": "HIG-RunIISummer20UL18NanoAOD-00001_1_cfg.py",
+		"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+	}		
+}
+
+missing_UL_bkgs = {
+	"DiPhotonJetsBox_M40_80" : {
+	
+		"2016" : {
+			"cmssw_v_gen": "CMSSW_10_6_28_patch1",
+			"pset_gen": "HIG-RunIISummer20UL16GEN-00072_1_cfg.py",
+			"scram_arch_gen": "slc7_amd64_gcc700",
+			
+			"cmssw_v_sim": "CMSSW_10_6_17_patch1",
+			"pset_sim": "HIG-RunIISummer20UL16SIM-02919_1_cfg.py",
+			"scram_arch_sim": "slc7_amd64_gcc700",
+			
+			"cmssw_v_mix": "CMSSW_10_6_17_patch1",
+			"pset_mix": "HIG-RunIISummer20UL16DIGIPremix-02914_1_cfg.py",
+			"scram_arch_mix": "slc7_amd64_gcc700",
+			
+			"cmssw_v_hlt": "CMSSW_8_0_33_UL",
+			"pset_hlt": "HIG-RunIISummer20UL16HLT-02919_1_cfg.py",
+			"scram_arch_hlt": "slc7_amd64_gcc530",
+			
+			"cmssw_v_reco": "CMSSW_10_6_17_patch1",
+			"pset_reco": "HIG-RunIISummer20UL16RECO-02919_1_cfg.py",
+			"scram_arch_reco": "slc7_amd64_gcc700",
+			
+			"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+			"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODv2-02910_1_cfg.py",
+			"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+
+			},
+	
+		"2016_APV" : {
+			"cmssw_v_gen": "CMSSW_10_6_28_patch1",
+			"pset_gen": "HIG-RunIISummer20UL16GENAPV-00063_1_cfg.py",
+			"scram_arch_gen": "slc7_amd64_gcc700",
+	
+			"cmssw_v_sim": "CMSSW_10_6_17_patch1",
+			"pset_sim": "HIG-RunIISummer20UL16SIMAPV-02619_1_cfg.py",
+			"scram_arch_sim": "slc7_amd64_gcc700",
+			
+			"cmssw_v_mix": "CMSSW_10_6_17_patch1",
+			"pset_mix": "HIG-RunIISummer20UL16DIGIPremixAPV-02598_1_cfg.py",
+			"scram_arch_mix": "slc7_amd64_gcc700",
+			
+			"cmssw_v_hlt": "CMSSW_8_0_33_UL",
+			"pset_hlt": "HIG-RunIISummer20UL16HLTAPV-02619_1_cfg.py",
+			"scram_arch_hlt": "slc7_amd64_gcc530",
+			
+			"cmssw_v_reco": "CMSSW_10_6_17_patch1",
+			"pset_reco": "HIG-RunIISummer20UL16RECOAPV-02619_1_cfg.py",
+			"scram_arch_reco": "slc7_amd64_gcc700",
+			
+			"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+			"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODAPVv2-02263_1_cfg.py",
+			"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+			}
+	},
+	
+	"DiPhotonJetsBox1BJet_MGG_80toInf" : {
+	
+		"2016_APV" : {
+			"cmssw_v_gen": "CMSSW_10_6_28_patch1",
+			"pset_gen": "HIG-RunIISummer20UL16GENAPV-00061_1_cfg.py",
+			"scram_arch_gen": "slc7_amd64_gcc700",
+	
+			"cmssw_v_sim": "CMSSW_10_6_17_patch1",
+			"pset_sim": "HIG-RunIISummer20UL16SIMAPV-00216_1_cfg.py",
+			"scram_arch_sim": "slc7_amd64_gcc700",
+			
+			"cmssw_v_mix": "CMSSW_10_6_17_patch1",
+			"pset_mix": "HIG-RunIISummer20UL16DIGIPremixAPV-00214_1_cfg.py",
+			"scram_arch_mix": "slc7_amd64_gcc700",
+			
+			"cmssw_v_hlt": "CMSSW_8_0_33_UL",
+			"pset_hlt": "HIG-RunIISummer20UL16HLTAPV-00216_1_cfg.py",
+			"scram_arch_hlt": "slc7_amd64_gcc530",
+			
+			"cmssw_v_reco": "CMSSW_10_6_17_patch1",
+			"pset_reco": "HIG-RunIISummer20UL16RECOAPV-00216_1_cfg.py",
+			"scram_arch_reco": "slc7_amd64_gcc700",
+			
+			"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+			"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODAPVv2-00548_1_cfg.py",
+			"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+	
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODAPVv9-00548_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+			}
+	},
+	
+	"DiPhotonJetsBox_MGG_80toInf" : {
+	
+		"2016_APV" : {
+			"cmssw_v_gen": "CMSSW_10_6_28_patch1",
+			"pset_gen": "HIG-RunIISummer20UL16GENAPV-00060_1_cfg.py",
+			"scram_arch_gen": "slc7_amd64_gcc700",
+	
+			"cmssw_v_sim": "CMSSW_10_6_17_patch1",
+			"pset_sim": "HIG-RunIISummer20UL16SIMAPV-00215_1_cfg.py",
+			"scram_arch_sim": "slc7_amd64_gcc700",
+			
+			"cmssw_v_mix": "CMSSW_10_6_17_patch1",
+			"pset_mix": "HIG-RunIISummer20UL16DIGIPremixAPV-00213_1_cfg.py",
+			"scram_arch_mix": "slc7_amd64_gcc700",
+			
+			"cmssw_v_hlt": "CMSSW_8_0_33_UL",
+			"pset_hlt": "HIG-RunIISummer20UL16HLTAPV-00215_1_cfg.py",
+			"scram_arch_hlt": "slc7_amd64_gcc530",
+			
+			"cmssw_v_reco": "CMSSW_10_6_17_patch1",
+			"pset_reco": "HIG-RunIISummer20UL16RECOAPV-00215_1_cfg.py",
+			"scram_arch_reco": "slc7_amd64_gcc700",
+			
+			"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+			"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODAPVv2-00546_1_cfg.py",
+			"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+	
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODAPVv9-00546_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+			}
+	},
+	
+	"GJets_DoubleEMEnriched_PtG_20MGG_40To80_TuneCP5_13TeV_madgraphMLM_pythia8" : {
+	
+		"2016" : {
+			"cmssw_v_gen": "CMSSW_10_6_20_patch1",
+			"pset_gen": "HIG-RunIISummer20UL16wmLHEGEN-01100_1_cfg.py",
+			"scram_arch_gen": "slc7_amd64_gcc700",
+			
+			"cmssw_v_sim": "CMSSW_10_6_17_patch1",
+			"pset_sim": "HIG-RunIISummer20UL16SIM-00282_1_cfg.py",
+			"scram_arch_sim": "slc7_amd64_gcc700",
+			
+			"cmssw_v_mix": "CMSSW_10_6_17_patch1",
+			"pset_mix": "HIG-RunIISummer20UL16DIGIPremix-00280_1_cfg.py",
+			"scram_arch_mix": "slc7_amd64_gcc700",
+			
+			"cmssw_v_hlt": "CMSSW_8_0_33_UL",
+			"pset_hlt": "HIG-RunIISummer20UL16HLT-00282_1_cfg.py",
+			"scram_arch_hlt": "slc7_amd64_gcc530",
+			
+			"cmssw_v_reco": "CMSSW_10_6_17_patch1",
+			"pset_reco": "HIG-RunIISummer20UL16RECO-00282_1_cfg.py",
+			"scram_arch_reco": "slc7_amd64_gcc700",
+			
+			"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+			"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODv2-00538_1_cfg.py",
+			"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+	
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODv9-00576_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+			},
+	
+		"2016_APV" : {
+			"cmssw_v_gen": "CMSSW_10_6_20_patch1",
+			"pset_gen": "HIG-RunIISummer20UL16wmLHEGENAPV-00298_1_cfg.py",
+			"scram_arch_gen": "slc7_amd64_gcc700",
+	
+			"cmssw_v_sim": "CMSSW_10_6_17_patch1",
+			"pset_sim": "HIG-RunIISummer20UL16SIMAPV-00291_1_cfg.py",
+			"scram_arch_sim": "slc7_amd64_gcc700",
+			
+			"cmssw_v_mix": "CMSSW_10_6_17_patch1",
+			"pset_mix": "HIG-RunIISummer20UL16DIGIPremixAPV-00289_1_cfg.py",
+			"scram_arch_mix": "slc7_amd64_gcc700",
+			
+			"cmssw_v_hlt": "CMSSW_8_0_33_UL",
+			"pset_hlt": "HIG-RunIISummer20UL16HLTAPV-00291_1_cfg.py",
+			"scram_arch_hlt": "slc7_amd64_gcc530",
+			
+			"cmssw_v_reco": "CMSSW_10_6_17_patch1",
+			"pset_reco": "HIG-RunIISummer20UL16RECOAPV-00291_1_cfg.py",
+			"scram_arch_reco": "slc7_amd64_gcc700",
+			
+			"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+			"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODAPVv2-00513_1_cfg.py",
+			"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+	
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODAPVv9-00513_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+			}
+	},
+	
+	"GJets_DoubleEMEnriched_PtG_40MGG_80_TuneCP5_13TeV_madgraphMLM_pythia8" : {
+	
+		"2016" : {
+			"cmssw_v_gen": "CMSSW_10_6_20_patch1",
+			"pset_gen": "HIG-RunIISummer20UL16wmLHEGEN-01098_1_cfg.py",
+			"scram_arch_gen": "slc7_amd64_gcc700",
+			
+			"cmssw_v_sim": "CMSSW_10_6_17_patch1",
+			"pset_sim": "HIG-RunIISummer20UL16SIM-00281_1_cfg.py",
+			"scram_arch_sim": "slc7_amd64_gcc700",
+			
+			"cmssw_v_mix": "CMSSW_10_6_17_patch1",
+			"pset_mix": "HIG-RunIISummer20UL16DIGIPremix-00279_1_cfg.py",
+			"scram_arch_mix": "slc7_amd64_gcc700",
+			
+			"cmssw_v_hlt": "CMSSW_8_0_33_UL",
+			"pset_hlt": "HIG-RunIISummer20UL16HLT-00281_1_cfg.py",
+			"scram_arch_hlt": "slc7_amd64_gcc530",
+			
+			"cmssw_v_reco": "CMSSW_10_6_17_patch1",
+			"pset_reco": "HIG-RunIISummer20UL16RECO-00281_1_cfg.py",
+			"scram_arch_reco": "slc7_amd64_gcc700",
+			
+			"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+			"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODv2-00311_1_cfg.py",
+			"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+	
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODv9-00351_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+			},
+	
+		"2016_APV" : {
+			"cmssw_v_gen": "CMSSW_10_6_20_patch1",
+			"pset_gen": "HIG-RunIISummer20UL16wmLHEGENAPV-00296_1_cfg.py",
+			"scram_arch_gen": "slc7_amd64_gcc700",
+	
+			"cmssw_v_sim": "CMSSW_10_6_17_patch1",
+			"pset_sim": "HIG-RunIISummer20UL16SIMAPV-00290_1_cfg.py",
+			"scram_arch_sim": "slc7_amd64_gcc700",
+			
+			"cmssw_v_mix": "CMSSW_10_6_17_patch1",
+			"pset_mix": "HIG-RunIISummer20UL16DIGIPremixAPV-00288_1_cfg.py",
+			"scram_arch_mix": "slc7_amd64_gcc700",
+			
+			"cmssw_v_hlt": "CMSSW_8_0_33_UL",
+			"pset_hlt": "HIG-RunIISummer20UL16HLTAPV-00290_1_cfg.py",
+			"scram_arch_hlt": "slc7_amd64_gcc530",
+			
+			"cmssw_v_reco": "CMSSW_10_6_17_patch1",
+			"pset_reco": "HIG-RunIISummer20UL16RECOAPV-00290_1_cfg.py",
+			"scram_arch_reco": "slc7_amd64_gcc700",
+			
+			"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+			"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODAPVv2-00507_1_cfg.py",
+			"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+	
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODAPVv9-00507_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+			}
+	},
+
+	
+	"GJets_DoubleEMEnriched_PtG_20MGG-80_TuneCP5_13TeV_madgraphMLM_pythia8" : {
+		
+		"2016_APV" : {
+			"cmssw_v_gen": "CMSSW_10_6_28_patch1",
+			"pset_gen": "HIG-RunIISummer20UL16wmLHEGENAPV-00297_1_cfg.py",
+			"scram_arch_gen": "slc7_amd64_gcc700",
+	
+			"cmssw_v_sim": "CMSSW_10_6_17_patch1",
+			"pset_sim": "HIG-RunIISummer20UL16SIMAPV-00290_1_cfg.py",
+			"scram_arch_sim": "slc7_amd64_gcc700",
+			
+			"cmssw_v_mix": "CMSSW_10_6_17_patch1",
+			"pset_mix": "HIG-RunIISummer20UL16DIGIPremixAPV-00288_1_cfg.py",
+			"scram_arch_mix": "slc7_amd64_gcc700",
+			
+			"cmssw_v_hlt": "CMSSW_8_0_33_UL",
+			"pset_hlt": "HIG-RunIISummer20UL16HLTAPV-00290_1_cfg.py",
+			"scram_arch_hlt": "slc7_amd64_gcc530",
+			
+			"cmssw_v_reco": "CMSSW_10_6_17_patch1",
+			"pset_reco": "HIG-RunIISummer20UL16RECOAPV-00290_1_cfg.py",
+			"scram_arch_reco": "slc7_amd64_gcc700",
+			
+			"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+			"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODAPVv2-00507_1_cfg.py",
+			"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+	
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODAPVv9-00507_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+			}
+	},
+
+	"GJets_HT_400To600_TuneCP5_13TeV_madgraphMLM_pythia8" : {
+	
+		"2016" : {
+			"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+			"pset_miniaodsim": "JME-RunIISummer20UL16MiniAODv2-00008_1_cfg.py",
+			"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+			}
+	},
+
+
+	"GJets_HT_600ToInf_TuneCP5_13TeV_madgraphMLM_pythia8" : {
+
+		"2016" : {
+			"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+			"pset_miniaodsim": "JME-RunIISummer20UL16MiniAODv2-00010_1_cfg.py",
+			"scram_arch_miniaodsim": "slc7_amd64_gcc700",
+			}
+	},
+
+}
