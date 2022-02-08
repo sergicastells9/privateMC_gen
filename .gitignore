@@ -1,5 +1,6 @@
 CMSSW_*
 *.json
+*.root
 tasks/
 example/
 gridpacks/

@@ -31,4 +31,7 @@
 #python submit_all.py --tag v0.1_addrawphopt_20210506 --skip_local --dsfilter TTGJets_TuneCP5_13TeV 
 
 
-python submit_all.py --tag v0.2_nanoaodv8_20210510 --skip_local 
+#python submit_all.py --tag v0.2_nanoaodv8_20210510 --skip_local 
+
+#NMSSM samples
+python submit_all.py --tag test --skip_local 

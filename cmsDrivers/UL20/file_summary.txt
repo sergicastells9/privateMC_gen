@@ -1,0 +1,7 @@
+
+
+SMP-RunIISummer20UL16wmLHEGENAPV-00350		TGJets_TuneCP5_13TeV-amcatnlo-madspin-pythia8					->available at nanoAODv9 (http://uaf-8.t2.ucsd.edu/~jguiang/dis/?query=%2FTGJets_TuneCP5_13TeV-amcatnlo-madspin-pythia8%2FRunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11_ext1-v1%2FNANOAODSIM&type=chain&short=short)
+SMP-RunIISummer20UL16wmLHEGENAPV-00313		TTGJets_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8		->missing psets after LHE step(https://cms-pdmv.cern.ch/mcm/requests?prepid=*20UL16*&dataset_name=TTGJets_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8&page=0&shown=127)
+SMP-RunIISummer20UL16wmLHEGEN-00352				TTGJets_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8		->missing psets after LHE step(https://cms-pdmv.cern.ch/mcm/requests?prepid=*20UL16*&dataset_name=TTGJets_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8&page=0&shown=127)
+PPD-RunIISummer20UL16MiniAODv2-00009			TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8								->available at AOD level, only miniAOD to be produced
+
