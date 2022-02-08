@@ -55,7 +55,7 @@ def runall(special_dir, total_nevents, events_per_output):
 					scram_arch_gen = EFT_benchmarks[year]["scram_arch_gen"]
 
 					edit_pset_EFT( str('HH_'+eft_bm), 'HH_1' , year  )	
-					os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP1_%s"%(special_dir,tag,proc_tag))
+					#os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP1_%s"%(special_dir,tag,proc_tag))
 
 					step1 = CMSSWTask(
 					        # Change dataset to something more meaningful (but keep STEP1, as we use this 
@@ -86,7 +86,7 @@ def runall(special_dir, total_nevents, events_per_output):
 					cmssw_v_sim = EFT_benchmarks[year]["cmssw_v_sim"] 
 					pset_sim = EFT_benchmarks[year]["pset_sim"]
 					scram_arch_sim = EFT_benchmarks[year]["scram_arch_sim"]
-					os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP2_%s"%(special_dir,tag,proc_tag))
+					#os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP2_%s"%(special_dir,tag,proc_tag))
 					
 					step2 = CMSSWTask(
 					        sample = DirectorySample(
@@ -111,7 +111,7 @@ def runall(special_dir, total_nevents, events_per_output):
 					cmssw_v_mix = EFT_benchmarks[year]["cmssw_v_mix"] 
 					pset_mix = EFT_benchmarks[year]["pset_mix"]
 					scram_arch_mix = EFT_benchmarks[year]["scram_arch_mix"]
-					os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP3_%s"%(special_dir,tag,proc_tag))
+					#os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP3_%s"%(special_dir,tag,proc_tag))
 					
 					step3 = CMSSWTask(
 					        sample = DirectorySample(
@@ -136,7 +136,7 @@ def runall(special_dir, total_nevents, events_per_output):
 					cmssw_v_hlt = EFT_benchmarks[year]["cmssw_v_hlt"] 
 					pset_hlt = EFT_benchmarks[year]["pset_hlt"]
 					scram_arch_hlt = EFT_benchmarks[year]["scram_arch_hlt"]
-					os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP4_%s"%(special_dir,tag,proc_tag))
+					#os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP4_%s"%(special_dir,tag,proc_tag))
 					
 					step4 = CMSSWTask(
 					        sample = DirectorySample(
@@ -164,7 +164,7 @@ def runall(special_dir, total_nevents, events_per_output):
 					cmssw_v_reco = EFT_benchmarks[year]["cmssw_v_reco"] 
 					pset_reco = EFT_benchmarks[year]["pset_reco"]
 					scram_arch_reco = EFT_benchmarks[year]["scram_arch_reco"]
-					os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP5_%s"%(special_dir,tag,proc_tag))
+					#os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP5_%s"%(special_dir,tag,proc_tag))
 					
 					step5 = CMSSWTask(
 					        sample = DirectorySample(
@@ -191,7 +191,7 @@ def runall(special_dir, total_nevents, events_per_output):
 					cmssw_v_miniaodsim = EFT_benchmarks[year]["cmssw_v_miniaodsim"] 
 					pset_miniaodsim = EFT_benchmarks[year]["pset_miniaodsim"]
 					scram_arch_miniaodsim = EFT_benchmarks[year]["scram_arch_miniaodsim"]
-					os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP6_%s"%(special_dir,tag,proc_tag))
+					#os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP6_%s"%(special_dir,tag,proc_tag))
 
 					step6 = CMSSWTask(
 					        sample = DirectorySample(
@@ -220,7 +220,7 @@ def runall(special_dir, total_nevents, events_per_output):
 					cmssw_v_nanoaodsim = EFT_benchmarks[year]["cmssw_v_nanoaodsim"] 
 					pset_nanoaodsim = EFT_benchmarks[year]["pset_nanoaodsim"]
 					scram_arch_nanoaodsim = EFT_benchmarks[year]["scram_arch_nanoaodsim"]
-					os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP7_%s"%(special_dir,tag,proc_tag))
+					#os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP7_%s"%(special_dir,tag,proc_tag))
 
 					step7 = CMSSWTask(
 					        sample = DirectorySample(
