@@ -1,7 +1,6 @@
 import sys, os
 import time
 import itertools
-import numpy
 import json
 
 from metis.Sample import DBSSample, DirectorySample, Sample
@@ -27,12 +26,69 @@ local_sets = []
 
 
 if not args.skip_local:
-    local_sets = [
-        ("DiPhotonJetsBox1BJet_MGG_80toInf_2016", "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/DiPhotonJetsBox1BJet_MGG_80toInf_2016_APV_STEP6_v1/", 1, "2016_MC"),
-    ]
+ 	local_sets = [
+		("DiPhotonJetsBox1BJet_MGG_80toInf_2016_APV"																						, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/DiPhotonJetsBox1BJet_MGG_80toInf_2016_APV_STEP6_v1/"																			, 10, "2016_APV_MC"),
+		("DiPhotonJetsBox_M40_80_2016_APV"																											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/DiPhotonJetsBox_M40_80_2016_APV_STEP6_v1/"																								, 10, "2016_APV_MC"),
+		("DiPhotonJetsBox_M40_80_2016"																													, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/DiPhotonJetsBox_M40_80_2016_STEP6_v1/"																										, 10, "2016_MC"),
+		("DiPhotonJetsBox_MGG_80toInf_2016_APV"																									, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/DiPhotonJetsBox_MGG_80toInf_2016_APV_STEP6_v1/"																						, 10, "2016_APV_MC"),
+		("GJets_DoubleEMEnriched_PtG_20MGG_40To80_TuneCP5_13TeV_madgraphMLM_pythia8_2016_APV"		, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GJets_DoubleEMEnriched_PtG_20MGG_40To80_TuneCP5_13TeV_madgraphMLM_pythia8_2016_APV_STEP6_v1/", 10, "2016_APV_MC"),
+		("GJets_DoubleEMEnriched_PtG_20MGG_40To80_TuneCP5_13TeV_madgraphMLM_pythia8_2016"				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GJets_DoubleEMEnriched_PtG_20MGG_40To80_TuneCP5_13TeV_madgraphMLM_pythia8_2016_STEP6_v1/"	, 10, "2016_MC"),
+		("GJets_DoubleEMEnriched_PtG_40MGG_80_TuneCP5_13TeV_madgraphMLM_pythia8_2016_APV"				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GJets_DoubleEMEnriched_PtG_40MGG_80_TuneCP5_13TeV_madgraphMLM_pythia8_2016_APV_STEP6_v1/"	, 10, "2016_APV_MC"),
+		("GJets_DoubleEMEnriched_PtG_40MGG_80_TuneCP5_13TeV_madgraphMLM_pythia8_2016"						, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GJets_DoubleEMEnriched_PtG_40MGG_80_TuneCP5_13TeV_madgraphMLM_pythia8_2016_STEP6_v1/"			, 10, "2016_MC"),
+		("TGJets_TuneCP5_13TeV-amcatnlo-madspin-pythia8_2016"																		, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/TGJets_TuneCP5_13TeV-amcatnlo-madspin-pythia8_2016_STEP6_v1/"											, 10, "2016_MC"),
+		
+		("GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2016_APV"									, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2016_APV_STEP6_v1/"		, 10, "2016_APV_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2016"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2016_STEP6_v1/"				, 10, "2016_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2017"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2017_STEP6_v1/"				, 10, "2017_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2018"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2018_STEP6_v1/"				, 10, "2018_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2016_APV"									, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2016_APV_STEP6_v1/"		, 10, "2016_APV_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2016"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2016_STEP6_v1/"				, 10, "2016_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2017"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2017_STEP6_v1/"				, 10, "2017_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2018"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2018_STEP6_v1/"				, 10, "2018_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2016_APV"								, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2016_APV_STEP6_v1/"	, 10, "2016_APV_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2016"										, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2016_STEP6_v1/"			, 10, "2016_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2017"										, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2017_STEP6_v1/"			, 10, "2017_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2018"										, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2018_STEP6_v1/"			, 10, "2018_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2016_APV"									, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2016_APV_STEP6_v1/"		, 10, "2016_APV_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2016"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2016_STEP6_v1/"				, 10, "2016_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2017"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2017_STEP6_v1/"				, 10, "2017_MC"),
+		("GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2018"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2018_STEP6_v1/"				, 10, "2018_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_cHHH0_2016_APV"																			, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH0_2016_APV_STEP6_v1/"												, 10, "2016_APV_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_cHHH0_2016"																					, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH0_2016_STEP6_v1/"														, 10, "2016_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_cHHH0_2017"																					, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH0_2017_STEP6_v1/"														, 10, "2017_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_cHHH0_2018"																					, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH0_2018_STEP6_v1/"														, 10, "2018_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_SM_2016_APV"																					, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_SM_2016_APV_STEP6_v1/"														, 10, "2016_APV_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_SM_2016"																							, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_SM_2016_STEP6_v1/"																, 10, "2016_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_SM_2017"																							, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_SM_2017_STEP6_v1/"																, 10, "2017_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_SM_2018"																							, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_SM_2018_STEP6_v1/"																, 10, "2018_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2016_APV"																		, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2016_APV_STEP6_v1/"											, 10, "2016_APV_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2016"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2016_STEP6_v1/"													, 10, "2016_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2017"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2017_STEP6_v1/"													, 10, "2017_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2018"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2018_STEP6_v1/"													, 10, "2018_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_cHHH5_2016_APV"																			, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH5_2016_APV_STEP6_v1/"												, 10, "2016_APV_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_cHHH5_2016"																					, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH5_2016_STEP6_v1/"														, 10, "2016_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_cHHH5_2017"																					, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH5_2017_STEP6_v1/"														, 10, "2017_MC"),
+		("GluGluToHHTo2G2W_dileptonic_node_cHHH5_2018"																					, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH5_2018_STEP6_v1/"														, 10, "2018_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_cHHH0_2016_APV"																		, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH0_2016_APV_STEP6_v1/"											, 10, "2016_APV_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_cHHH0_2016"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH0_2016_STEP6_v1/"													, 10, "2016_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_cHHH0_2017"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH0_2017_STEP6_v1/"													, 10, "2017_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_cHHH0_2018"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH0_2018_STEP6_v1/"													, 10, "2018_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_SM_2016_APV"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_SM_2016_APV_STEP6_v1/"													, 10, "2016_APV_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_SM_2016"																						, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_SM_2016_STEP6_v1/"															, 10, "2016_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_SM_2017"																						, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_SM_2017_STEP6_v1/"															, 10, "2017_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_SM_2018"																						, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_SM_2018_STEP6_v1/"															, 10, "2018_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2016_APV"																	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2016_APV_STEP6_v1/"										, 10, "2016_APV_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2016"																			, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2016_STEP6_v1/"												, 10, "2016_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2017"																			, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2017_STEP6_v1/"												, 10, "2017_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2018"																			, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2018_STEP6_v1/"												, 10, "2018_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_cHHH5_2016_APV"																		, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH5_2016_APV_STEP6_v1/"											, 10, "2016_APV_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_cHHH5_2016"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH5_2016_STEP6_v1/"													, 10, "2016_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_cHHH5_2017"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH5_2017_STEP6_v1/"													, 10, "2017_MC"),
+		("GluGluToHHTo2G2W_semileptonic_node_cHHH5_2018"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH5_2018_STEP6_v1/"													, 10, "2018_MC"),
+]
 
 # some job configurations
-job_dir = "nanoaod_runII_20UL/nanoAODv9/"
+job_dir = "nanoAOD_runII_20UL/nanoAODv9/"
 job_tag = args.tag
 job_filter = args.filter
 ds_filter = args.dsfilter
@@ -92,12 +148,12 @@ while True:
 
 
     # parse the total summary and write out the dashboard
-    StatsParser(data=total_summary, webdir="~/public_html/dump/metis_nanoaod_v8/").do()
-    os.system("chmod -R 755 ~/public_html/dump/metis_nanoaod_v8")
+    StatsParser(data=total_summary, webdir="~/public_html/dump/metis_nanoaod_v9/").do()
+    os.system("chmod -R 755 ~/public_html/dump/metis_nanoaod_v9")
     if allcomplete:
         print ""
         print "Job={} finished".format(job_tag)
         print ""
         break
-    print "Sleeping 10 minutes ..."
-    time.sleep(10*60)
+    print "Sleeping 30 minutes ..."
+    time.sleep(30*60)
