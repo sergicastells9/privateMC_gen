@@ -464,6 +464,63 @@ EFT_benchmarks = {
 	}		
 }
 
+miniAOD_to_nanoAOD = {
+	"MC"	:	{
+
+		"2016" : {
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODv9-00678_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+		},
+	
+		"2016_APV" : {
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODAPVv9-00193_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+		},
+	
+		"2017" : {
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL17NanoAODv9-00797_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+		},
+	
+		"2018" : {
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL18NanoAODv9-00892_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+		}		
+	},
+
+	"Data"	:	{
+
+		"2016" : {
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODv9-00891_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+		},
+	
+		"2016_APV" : {
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_19_patch2",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODAPVv2-00252_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+		},
+	
+		"2017" : {
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_26",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL17NanoAODv9-00304_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+		},
+	
+		"2018" : {
+			"cmssw_v_nanoaodsim": "CMSSW_10_6_5",
+			"pset_nanoaodsim": "HIG-RunIISummer20UL18NanoAOD-00001_1_cfg.py",
+			"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+		}		
+	},
+}
+
+
 resonant_signals = {
 	"GluGluToBulkGravitonToHHTo2G2Tau"	:	{
 
