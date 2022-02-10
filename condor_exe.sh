@@ -66,22 +66,16 @@ then
 
 elif [[  $ARGS == *"2016_Data"*  ]]
 then 
+    cmssw_cfg="data_2016.py"
 
-    cmssw_cfg="NanoAODCFG_2016Data.py"
-elif [[  $ARGS == *"2016_APV_Data"*  ]]
-then 
-
-    cmssw_cfg="NanoAODCFG_2016Data.py"
 elif [[  $ARGS == *"2017_Data"*  ]]
 then 
+    cmssw_cfg="data_2017.py"
 
-    #cmssw_cfg="NanoAODCFG_2017Data.py"
-    cmssw_cfg="NanoAODv2_cfg_2017Data_UL.py"
 elif [[  $ARGS == *"2018_Data"*  ]]
 then 
+    cmssw_cfg="data_2018.py"
 
-    #cmssw_cfg="NanoAODCFG_2018Data.py"
-    cmssw_cfg="NanoAODv2_cfg_2018Data_UL.py"
 else
     echo "Don't know which cmssw cfg to use, check ARGS!!"
 fi
