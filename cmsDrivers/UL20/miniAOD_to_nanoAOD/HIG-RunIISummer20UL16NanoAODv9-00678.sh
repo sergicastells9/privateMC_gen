@@ -46,4 +46,4 @@ EVENTS=10000
 
 
 # cmsDriver command
-cmsDriver.py  --python_filename HIG-RunIISummer20UL16NanoAODv9-00678_1_cfg.py --eventcontent NANOEDMAODSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier NANOAODSIM --fileout file:nanoaod.root --conditions 106X_mcRun2_asymptotic_v17 --step NANO --filein "dbs:/GluGluHToGG_M125_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17-v1/MINIAODSIM" --era Run2_2016,run2_nanoAOD_106Xv2 --no_exec --mc -n $EVENTS --nThreads 1 || exit $? ;
+cmsDriver.py  --python_filename HIG-RunIISummer20UL16NanoAODv9-00678_1_cfg.py --eventcontent NANOAODSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier NANOAODSIM --fileout file:nanoaod.root --conditions 106X_mcRun2_asymptotic_v17 --step NANO --filein "dbs:/GluGluHToGG_M125_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17-v1/MINIAODSIM" --era Run2_2016,run2_nanoAOD_106Xv2 --no_exec --mc -n $EVENTS --nThreads 1 || exit $? ;

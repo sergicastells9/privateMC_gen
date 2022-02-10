@@ -88,7 +88,7 @@ if not args.skip_local:
 ]
 
 # some job configurations
-job_dir = "nanoAOD_runII_20UL/nanoAODv9/"
+job_dir = "Summer20UL_nanoAODv9/"
 job_tag = args.tag
 job_filter = args.filter
 ds_filter = args.dsfilter
