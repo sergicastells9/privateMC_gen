@@ -11,7 +11,7 @@ from update_pset_NMSSM import edit_pset_graviton
 from allconfig import *
 
 #years = ['2016', '2016_APV', '2017', '2018' ]
-years = ['2017', '2018' ]
+years = ['2016', '2016_APV']
 
 condor_submit_params={
         #"sites": "SDSC-PRP", # other_sites can be good_sites, your own list, etc.
@@ -27,8 +27,8 @@ condor_submit_params={
 
 #condor_submit_params = {"sites" : "T2_US_UCSD,T2_US_CALTECH,T2_US_MIT,T2_US_WISCONSIN,T2_US_Nebraska,T2_US_Purdue,T2_US_Vanderbilt,T2_US_Florida",
 
-#graviton_masses = [ '250', '300', '320', '350', '400', '450', '500', '600', '700', '800', '1000', '1250', '2000'  ]
-graviton_masses = [ '250']
+graviton_masses = [ '250', '300', '320', '350', '400', '450', '500', '600', '800', '1000', '2000'  ]
+#graviton_masses = [ '250']
 
 def runall(special_dir, total_nevents, events_per_output):
 
@@ -42,7 +42,7 @@ def runall(special_dir, total_nevents, events_per_output):
 				for graviton_mass in graviton_masses:
 
 					coupling	= 'M'+str(graviton_mass)
-					tag = str(proc) + "_" + year
+					tag = str(proc) + "_" + coupling + '_' + year
 					total_nevents_tmp = total_nevents				
 					steps = []
 	
@@ -56,7 +56,6 @@ def runall(special_dir, total_nevents, events_per_output):
 						scram_arch_gen = resonant_signals[proc][year]["scram_arch_gen"]
 						
 						edit_pset_graviton( coupling, 'M300' , year  )	
-						os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP1_%s"%(special_dir,tag,proc_tag))
 					
 						step1 = CMSSWTask(
 						        # Change dataset to something more meaningful (but keep STEP1, as we use this 
@@ -88,8 +87,6 @@ def runall(special_dir, total_nevents, events_per_output):
 						pset_sim = resonant_signals[proc][year]["pset_sim"]
 						scram_arch_sim = resonant_signals[proc][year]["scram_arch_sim"]
 						
-						os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP2_%s"%(special_dir,tag,proc_tag))
-					
 						step2 = CMSSWTask(
 						        sample = DirectorySample(
 						            location = step1.get_outputdir(),
@@ -114,8 +111,6 @@ def runall(special_dir, total_nevents, events_per_output):
 						pset_mix = resonant_signals[proc][year]["pset_mix"]
 						scram_arch_mix = resonant_signals[proc][year]["scram_arch_mix"]
 						
-						os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP3_%s"%(special_dir,tag,proc_tag))
-					
 						step3 = CMSSWTask(
 						        sample = DirectorySample(
 						            location = step2.get_outputdir(),
@@ -140,8 +135,6 @@ def runall(special_dir, total_nevents, events_per_output):
 						pset_hlt = resonant_signals[proc][year]["pset_hlt"]
 						scram_arch_hlt = resonant_signals[proc][year]["scram_arch_hlt"]
 						
-						os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP4_%s"%(special_dir,tag,proc_tag))
-					
 						step4 = CMSSWTask(
 						        sample = DirectorySample(
 						            location = step3.get_outputdir(),
@@ -169,8 +162,6 @@ def runall(special_dir, total_nevents, events_per_output):
 						pset_reco = resonant_signals[proc][year]["pset_reco"]
 						scram_arch_reco = resonant_signals[proc][year]["scram_arch_reco"]
 						
-						os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP5_%s"%(special_dir,tag,proc_tag))
-					
 						step5 = CMSSWTask(
 						        sample = DirectorySample(
 						            location = step4.get_outputdir(),
@@ -197,8 +188,6 @@ def runall(special_dir, total_nevents, events_per_output):
 						pset_miniaodsim = resonant_signals[proc][year]["pset_miniaodsim"]
 						scram_arch_miniaodsim = resonant_signals[proc][year]["scram_arch_miniaodsim"]
 	
-						os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP6_%s"%(special_dir,tag,proc_tag))
-					
 						step6 = CMSSWTask(
 						        sample = DirectorySample(
 						            location = step5.get_outputdir(),
@@ -234,5 +223,5 @@ def runall(special_dir, total_nevents, events_per_output):
 		time.sleep(10*60)
 
 
-#runall("nanoAOD_runII_20UL", 400000, 250)
-runall("nanoAOD_runII_20UL_test", 5, 5)
+runall("nanoAOD_runII_20UL", 400000, 250)
+#runall("nanoAOD_runII_20UL_test", 5, 5)

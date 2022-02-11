@@ -271,13 +271,13 @@ signal_UL20 = {
 		"pset_reco": "HIG-RunIISummer20UL16RECOAPV-00895_1_cfg.py",
 		"scram_arch_reco": "slc7_amd64_gcc700",
 		
-		"cmssw_v_miniaodsim": "CMSSW_10_6_17_patch1",
-		"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODAPV-00895_1_cfg.py",
+		"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+		"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODAPVv2-00193_1_cfg.py",
 		"scram_arch_miniaodsim": "slc7_amd64_gcc700",
 
-		"cmssw_v_nanoaodsim": "CMSSW_10_6_19_patch2",
-		"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODAPVv2-00252_1_cfg.py",
-		"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
+		#"cmssw_v_nanoaodsim": "CMSSW_10_6_19_patch2",
+		#"pset_nanoaodsim": "HIG-RunIISummer20UL16NanoAODAPVv2-00252_1_cfg.py",
+		#"scram_arch_nanoaodsim": "slc7_amd64_gcc700"
 	},
 
 	"2017" : {
@@ -394,8 +394,8 @@ EFT_benchmarks = {
 		"pset_reco": "HIG-RunIISummer20UL16RECOAPV-00895_1_cfg.py",
 		"scram_arch_reco": "slc7_amd64_gcc700",
 		
-		"cmssw_v_miniaodsim": "CMSSW_10_6_17_patch1",
-		"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODAPV-00895_1_cfg.py",
+		"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+		"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODAPVv2-00193_1_cfg.py",
 		"scram_arch_miniaodsim": "slc7_amd64_gcc700",
 
 		"cmssw_v_nanoaodsim": "CMSSW_10_6_19_patch2",
@@ -574,9 +574,9 @@ resonant_signals = {
 			"cmssw_v_reco": "CMSSW_10_6_17_patch1",
 			"pset_reco": "HIG-RunIISummer20UL16RECOAPV-00895_1_cfg.py",
 			"scram_arch_reco": "slc7_amd64_gcc700",
-			
-			"cmssw_v_miniaodsim": "CMSSW_10_6_17_patch1",
-			"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODAPV-00895_1_cfg.py",
+		
+			"cmssw_v_miniaodsim": "CMSSW_10_6_25",
+			"pset_miniaodsim": "HIG-RunIISummer20UL16MiniAODAPVv2-00193_1_cfg.py",
 			"scram_arch_miniaodsim": "slc7_amd64_gcc700",
 	
 			"cmssw_v_nanoaodsim": "CMSSW_10_6_19_patch2",

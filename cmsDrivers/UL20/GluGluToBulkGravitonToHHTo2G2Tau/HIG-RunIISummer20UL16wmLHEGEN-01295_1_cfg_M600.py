@@ -2,12 +2,12 @@
 # using: 
 # Revision: 1.19 
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
-# with command line options: Configuration/GenProduction/python/HIG-RunIISummer20UL16wmLHEGENAPV-03182-fragment.py --python_filename HIG-RunIISummer20UL16wmLHEGENAPV-03182_1_cfg.py --eventcontent RAWSIM,LHE --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN,LHE --fileout file:HIG-RunIISummer20UL16wmLHEGENAPV-03182.root --conditions 106X_mcRun2_asymptotic_preVFP_v8 --beamspot Realistic25ns13TeV2016Collision --step LHE,GEN --geometry DB:Extended --era Run2_2016_HIPM --no_exec --mc 
+# with command line options: Configuration/GenProduction/python/HIG-RunIISummer20UL16wmLHEGEN-01295-fragment.py --python_filename HIG-RunIISummer20UL16wmLHEGEN-01295_1_cfg.py --eventcontent RAWSIM,LHE --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN,LHE --fileout file:HIG-RunIISummer20UL16wmLHEGEN-01295.root --conditions 106X_mcRun2_asymptotic_v13 --beamspot Realistic25ns13TeV2016Collision --step LHE,GEN --geometry DB:Extended --era Run2_2016 --no_exec --mc -n 5317 --nThreads 1
 import FWCore.ParameterSet.Config as cms
 
-from Configuration.Eras.Era_Run2_2016_HIPM_cff import Run2_2016_HIPM
+from Configuration.Eras.Era_Run2_2016_cff import Run2_2016
 
-process = cms.Process('GEN',Run2_2016_HIPM)
+process = cms.Process('GEN',Run2_2016)
 
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
@@ -24,7 +24,7 @@ process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(58)
+    input = cms.untracked.int32(5317)
 )
 
 # Input source
@@ -36,7 +36,7 @@ process.options = cms.untracked.PSet(
 
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
-    annotation = cms.untracked.string('Configuration/GenProduction/python/HIG-RunIISummer20UL16wmLHEGENAPV-03182-fragment.py nevts:58'),
+    annotation = cms.untracked.string('Configuration/GenProduction/python/HIG-RunIISummer20UL16wmLHEGEN-01295-fragment.py nevts:5317'),
     name = cms.untracked.string('Applications'),
     version = cms.untracked.string('$Revision: 1.19 $')
 )
@@ -54,7 +54,7 @@ process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('')
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(20971520),
-    fileName = cms.untracked.string('file:HIG-RunIISummer20UL16wmLHEGENAPV-03182.root'),
+    fileName = cms.untracked.string('file:HIG-RunIISummer20UL16wmLHEGEN-01295.root'),
     outputCommands = process.RAWSIMEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )
@@ -64,7 +64,7 @@ process.LHEoutput = cms.OutputModule("PoolOutputModule",
         dataTier = cms.untracked.string('LHE'),
         filterName = cms.untracked.string('')
     ),
-    fileName = cms.untracked.string('file:HIG-RunIISummer20UL16wmLHEGENAPV-03182_inLHE.root'),
+    fileName = cms.untracked.string('file:HIG-RunIISummer20UL16wmLHEGEN-01295_inLHE.root'),
     outputCommands = process.LHEEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )
@@ -74,9 +74,9 @@ process.LHEoutput = cms.OutputModule("PoolOutputModule",
 # Other statements
 process.genstepfilter.triggerConditions=cms.vstring("generation_step")
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, '106X_mcRun2_asymptotic_preVFP_v8', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '106X_mcRun2_asymptotic_v13', '')
 
-process.generator = cms.EDFilter("Pythia8ConcurrentHadronizerFilter",
+process.generator = cms.EDFilter("Pythia8HadronizerFilter",
     PythiaParameters = cms.PSet(
         parameterSets = cms.vstring(
             'pythia8CommonSettings', 
@@ -85,21 +85,14 @@ process.generator = cms.EDFilter("Pythia8ConcurrentHadronizerFilter",
             'processParameters'
         ),
         processParameters = cms.vstring(
-            '15:onMode = on', 
-            '24:mMin = 0.05', 
-            '24:onMode = off', 
-            '24:onIfAny = 11 13 15', 
             '25:m0 = 125.0', 
             '25:onMode = off', 
+            '25:onIfMatch = 5 -5', 
             '25:onIfMatch = 22 22', 
-            '25:onIfMatch = 24 -24', 
             'ResonanceDecayFilter:filter = on', 
             'ResonanceDecayFilter:exclusive = on', 
-            'ResonanceDecayFilter:eMuTauAsEquivalent = on', 
-            'ResonanceDecayFilter:allNuAsEquivalent  = on', 
-            'ResonanceDecayFilter:udscbAsEquivalent  = on', 
-            'ResonanceDecayFilter:mothers = 25,24', 
-            'ResonanceDecayFilter:daughters = 11,12,11,12,22,22'
+            'ResonanceDecayFilter:mothers = 25', 
+            'ResonanceDecayFilter:daughters = 5,5,22,22'
         ),
         pythia8CP5Settings = cms.vstring(
             'Tune:pp 14', 
@@ -155,16 +148,13 @@ process.generator = cms.EDFilter("Pythia8ConcurrentHadronizerFilter",
 
 
 process.externalLHEProducer = cms.EDProducer("ExternalLHEProducer",
-    args = cms.vstring('/cvmfs/cms.cern.ch/phys_generator/gridpacks/2017/13TeV/powheg/V2/GluGluToHH/ggHH_EWChL_slc7_amd64_gcc700_CMSSW_10_6_19_cHHH1_working.tgz'),
-    generateConcurrently = cms.untracked.bool(True),
-    nEvents = cms.untracked.uint32(58),
+    args = cms.vstring('/cvmfs/cms.cern.ch/phys_generator/gridpacks/UL/13TeV/madgraph/V5_2.6.5/doubleHiggs/Graviton_GF_HH/BulkGraviton_hh_GF_HH_narrow_M600_slc7_amd64_gcc700_CMSSW_9_3_16_tarball.tar.xz'),
+    nEvents = cms.untracked.uint32(5317),
     numberOfParameters = cms.uint32(1),
     outputFile = cms.string('cmsgrid_final.lhe'),
     scriptName = cms.FileInPath('GeneratorInterface/LHEInterface/data/run_generic_tarball_cvmfs.sh')
 )
 
-
-process.ProductionFilterSequence = cms.Sequence(process.generator)
 
 # Path and EndPath definitions
 process.lhe_step = cms.Path(process.externalLHEProducer)
@@ -181,7 +171,7 @@ associatePatAlgosToolsTask(process)
 # filter all path with the production filter sequence
 for path in process.paths:
 	if path in ['lhe_step']: continue
-	getattr(process,path).insert(0, process.ProductionFilterSequence)
+	getattr(process,path).insert(0, process.generator)
 
 # customisation of the process.
 

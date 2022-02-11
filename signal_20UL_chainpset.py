@@ -85,7 +85,8 @@ def runall(special_dir, total_nevents, events_per_output):
 				
 				if '2016' in year:
 					total_nevents_tmp /= 2
-				
+
+				'''				
 				step1 = CMSSWTask(
 				        # Change dataset to something more meaningful (but keep STEP1, as we use this 
 				        # for string replacement later); keep N=1
@@ -168,6 +169,7 @@ def runall(special_dir, total_nevents, events_per_output):
 				        scram_arch = scram_arch_reco,
 				        condor_submit_params =  condor_submit_params
 				        )
+				'''				
 				
 				step6 = CMSSWTask(
 				        sample = DirectorySample(
@@ -185,7 +187,7 @@ def runall(special_dir, total_nevents, events_per_output):
 				        scram_arch = scram_arch_miniaodsim,
 				        condor_submit_params =  condor_submit_params
 				        )
-				
+				'''			
 				step7 = CMSSWTask(
 				        sample = DirectorySample(
 				            location = step6.get_outputdir(),
@@ -201,9 +203,11 @@ def runall(special_dir, total_nevents, events_per_output):
 				        scram_arch = scram_arch_nanoaodsim,
 				        condor_submit_params =  condor_submit_params
 				        )
+				'''			
 				
 				total_summary = {}
-				for task in [step1,step2,step3,step4,step5,step6,step7]:
+				#for task in [step1,step2,step3,step4,step5,step6]:
+				for task in [step6]:
 				    task.process()
 				    summary = task.get_task_summary()
 				    total_summary[task.get_sample().get_datasetname()] = summary
@@ -239,9 +243,9 @@ def runall(special_dir, total_nevents, events_per_output):
 					pset_miniaodsim = signal_UL20[year]["pset_miniaodsim"]
 					scram_arch_miniaodsim = signal_UL20[year]["scram_arch_miniaodsim"]
 					
-					cmssw_v_nanoaodsim = signal_UL20[year]["cmssw_v_nanoaodsim"] 
-					pset_nanoaodsim = signal_UL20[year]["pset_nanoaodsim"]
-					scram_arch_nanoaodsim = signal_UL20[year]["scram_arch_nanoaodsim"]
+					#cmssw_v_nanoaodsim = signal_UL20[year]["cmssw_v_nanoaodsim"] 
+					#pset_nanoaodsim = signal_UL20[year]["pset_nanoaodsim"]
+					#scram_arch_nanoaodsim = signal_UL20[year]["scram_arch_nanoaodsim"]
 					
 					edit_pset_gghh_WW( coupling, 'cHHH1' , year, decay  )	
 
@@ -265,6 +269,7 @@ def runall(special_dir, total_nevents, events_per_output):
 					if '2016' in year:
 						total_nevents_tmp /= 2
 					
+					'''				
 					step1 = CMSSWTask(
 					        # Change dataset to something more meaningful (but keep STEP1, as we use this 
 					        # for string replacement later); keep N=1
@@ -347,6 +352,7 @@ def runall(special_dir, total_nevents, events_per_output):
 					        scram_arch = scram_arch_reco,
 					        condor_submit_params =  condor_submit_params
 					        )
+					'''				
 					
 					step6 = CMSSWTask(
 					        sample = DirectorySample(
@@ -364,7 +370,8 @@ def runall(special_dir, total_nevents, events_per_output):
 					        scram_arch = scram_arch_miniaodsim,
 					        condor_submit_params =  condor_submit_params
 					        )
-					
+
+					'''
 					step7 = CMSSWTask(
 					        sample = DirectorySample(
 					            location = step6.get_outputdir(),
@@ -380,10 +387,11 @@ def runall(special_dir, total_nevents, events_per_output):
 					        scram_arch = scram_arch_nanoaodsim,
 					        condor_submit_params =  condor_submit_params
 					        )
+					'''
 					
 					total_summary = {}
-					for task in [step1,step2,step3,step4,step5,step6,step7]:
 					#for task in [step1,step2,step3,step4,step5,step6]:
+					for task in [step6]:
 					    task.process()
 					    summary = task.get_task_summary()
 					    total_summary[task.get_sample().get_datasetname()] = summary

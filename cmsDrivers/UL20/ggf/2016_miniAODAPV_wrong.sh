@@ -19,12 +19,12 @@ export X509_USER_PROXY=$(pwd)/voms_proxy.txt
 export SCRAM_ARCH=slc7_amd64_gcc700
 
 source /cvmfs/cms.cern.ch/cmsset_default.sh
-if [ -r CMSSW_10_6_25/src ] ; then
-  echo release CMSSW_10_6_25 already exists
+if [ -r CMSSW_10_6_17_patch1/src ] ; then
+  echo release CMSSW_10_6_17_patch1 already exists
 else
-  scram p CMSSW CMSSW_10_6_25
+  scram p CMSSW CMSSW_10_6_17_patch1
 fi
-cd CMSSW_10_6_25/src
+cd CMSSW_10_6_17_patch1/src
 eval `scram runtime -sh`
 
 scram b
@@ -46,4 +46,5 @@ EVENTS=6195
 
 
 # cmsDriver command
-cmsDriver.py  --python_filename HIG-RunIISummer20UL16MiniAODAPVv2-00193_1_cfg.py --eventcontent MINIAODSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier MINIAODSIM --fileout file:HIG-RunIISummer20UL16MiniAODAPV-00895.root --conditions 106X_mcRun2_asymptotic_preVFP_v11 --step PAT --procModifiers run2_miniAOD_UL --geometry DB:Extended --filein file:HIG-RunIISummer20UL16RECOAPV-00895.root --era Run2_2016_HIPM --runUnscheduled --no_exec --mc -n $EVENTS --nThreads 1 || exit $? ;
+cmsDriver.py  --python_filename HIG-RunIISummer20UL16MiniAODAPV-00895_1_cfg.py --eventcontent MINIAODSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier MINIAODSIM --fileout file:HIG-RunIISummer20UL16MiniAODAPV-00895.root --conditions 106X_mcRun2_asymptotic_preVFP_v8 --step PAT --geometry DB:Extended --filein file:HIG-RunIISummer20UL16RECOAPV-00895.root --era Run2_2016_HIPM --runUnscheduled --no_exec --mc -n $EVENTS  --nThreads 1 || exit $? ;
+
