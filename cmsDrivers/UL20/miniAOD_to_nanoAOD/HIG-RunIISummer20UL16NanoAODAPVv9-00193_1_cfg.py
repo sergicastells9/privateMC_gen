@@ -2,7 +2,7 @@
 # using: 
 # Revision: 1.19 
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
-# with command line options: --python_filename HIG-RunIISummer20UL16NanoAODAPVv9-00193_1_cfg.py --eventcontent NANOAODSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier NANOAODSIM --fileout file:nanoaod.root --conditions 106X_mcRun2_asymptotic_preVFP_v11 --step NANO --filein dbs:/GluGluHToGG_M125_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v1/MINIAODSIM --era Run2_2016_HIPM,run2_nanoAOD_106Xv2 --no_exec --mc -n 10000 --nThreads 1
+# with command line options: --python_filename HIG-RunIISummer20UL16NanoAODAPVv9-00193_1_cfg.py --eventcontent NANOAODSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier NANOAODSIM --fileout file:nanoaod.root --conditions 106X_mcRun2_asymptotic_preVFP_v11 --step NANO --filein dbs:/GluGluHToGG_M125_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v1/MINIAODSIM --era Run2_2016_HIPM,run2_nanoAOD_106Xv2 --no_exec --mc -n 10000 --nThrea
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.Eras.Era_Run2_2016_HIPM_cff import Run2_2016_HIPM

@@ -2,6 +2,7 @@ CMSSW_*
 *.json
 *.root
 tasks/
+test/
 example/
 gridpacks/
 mergedNanoAOD/

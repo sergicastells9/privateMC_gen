@@ -17,10 +17,7 @@ parser.add_argument("--skip_local", help = "don't submit jobs for local samples"
 parser.add_argument("--skip_central", help = "don't submit jobs for central samples", action = "store_true")
 args = parser.parse_args()
 
-# for central inputs
-#dsdefs = []
-## datasetname, filesPerOutput, filtername
-from dsdefs_centralminiaod_UL import dsdefs
+from dsdefs_centralminiaod_UL import dsdefs_data
 # for local inputs
 local_sets = []
 
@@ -112,6 +109,36 @@ total_summary = {}
 while True:
     allcomplete = True
 
+    # Loop through central samples
+    for ds,fpo,args in dsdefs_data[:]:
+        if skip_central: continue
+        if (job_filter != "") and (args not in job_filter) : continue         
+        if (ds_filter != "") and (ds_filter not in ds) : continue         
+        sample = DBSSample( dataset=ds )
+        print(ds, args)
+
+        task = CondorTask(
+                sample = sample,
+                open_dataset = False,
+                files_per_output = fpo,
+                output_name = "nanoaod.root",
+                tag = job_tag,
+								cmssw_version = cmssw_ver,
+                executable = exec_path,
+                tarfile = "./package.tar.gz",
+                condor_submit_params = {"sites": "T2_US_UCSD,T2_US_CALTECH,T2_US_WISCONSIN,T2_US_Vanderbilt,T2_US_Florida", # other_sites can be good_sites, your own list, etc.
+                    "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel7-m202006"]],
+										"use_xrootd":True},
+                special_dir = hadoop_path,
+                arguments = args.replace(" ","|")
+                )
+        task.process()
+        allcomplete = allcomplete and task.complete()
+        # save some information for the dashboard
+        total_summary[ds] = task.get_task_summary()
+        with open("summary.json", "w") as f_out:
+            json.dump(total_summary, f_out, indent=4, sort_keys=True)
+
     # Loop through local samples
     for ds,loc,fpo,args in local_sets[:]:
         sample = DirectorySample( dataset = ds, location = loc )
@@ -129,11 +156,9 @@ while True:
                 cmssw_version = cmssw_ver,
                 executable = exec_path,
                 tarfile = "./package.tar.gz",
-                condor_submit_params = {"sites" : "T2_US_UCSD",
-                    #"classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel6-m202006"]]},
+                condor_submit_params = {"sites": "T2_US_UCSD,T2_US_CALTECH,T2_US_WISCONSIN,T2_US_Florida", # other_sites can be good_sites, your own list, etc.
                     "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel7-m202006"]]},
                 special_dir = hadoop_path,
-								#additional_input_files = [ "/home/users/fsetti/public_html/privateMC_gen/cmsDrivers/UL20/miniAOD_to_nanoAOD/HIG-RunIISummer20UL16NanoAODv9-00678_1_cfg.py" ],
                 arguments = args.replace(" ","|")
         )
         task.process()
@@ -153,4 +178,4 @@ while True:
         print ""
         break
     print "Sleeping 30 minutes ..."
-    time.sleep(30*60)
+    time.sleep(60*60)

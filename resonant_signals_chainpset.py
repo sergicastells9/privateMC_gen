@@ -10,12 +10,12 @@ sys.path.append("/home/users/fsetti/public_html/privateMC_gen")
 from update_pset_NMSSM import edit_pset_graviton
 from allconfig import *
 
-#years = ['2016', '2016_APV', '2017', '2018' ]
-years = ['2016', '2016_APV']
+years = ['2016', '2016_APV', '2017', '2018' ]
+#years = ['2016', '2016_APV']
 
 condor_submit_params={
         #"sites": "SDSC-PRP", # other_sites can be good_sites, your own list, etc.
-        "sites": "T2_US_UCSD,T2_US_CALTECH,T2_US_MIT,T2_US_WISCONSIN,T2_US_Vanderbilt,T2_US_Florida", # other_sites can be good_sites, your own list, etc.
+        "sites": "T2_US_UCSD,T2_US_CALTECH,T2_US_WISCONSIN,T2_US_Vanderbilt,T2_US_Florida", # other_sites can be good_sites, your own list, etc.
         "classads": [
             ["RequestK8SNamespace", "cms-ucsd-t2"], 
             ["SingularityImage", "/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel7"]

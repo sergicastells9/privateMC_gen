@@ -1,4 +1,4 @@
-dsdefs = [
+dsdefs_MC = [
         # 2016MC
         ("/ZGTo2LG_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/MINIAODSIM", 1, "2016MC"), 
         ("/DiPhotonJetsBox_M40_80-Sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM", 1, "2016MC"),
@@ -161,24 +161,28 @@ dsdefs = [
         ("/ggZH_HToGG_ZToLL_M125_TuneCP5_13TeV-powheg-pythia8/RunIISummer19UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v1/MINIAODSIM", 1, "2018MC"), 
         ("/ZH_HToGG_ZToAll_M125_TuneCP5_13TeV-powheg-pythia8/RunIISummer19UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v1/MINIAODSIM", 1, "2018MC"), 
         ("/THQ_ctcvcp_HToGG_M125_TuneCP5_13TeV-madgraph-pythia8/RunIISummer19UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v1/MINIAODSIM", 1, "2018MC"), 
+] 
+
+dsdefs_data = [
         # 2016Data
-        ("/DoubleEG/Run2016B-17Jul2018_ver1-v1/MINIAOD",10, "2016Data"),
-        ("/DoubleEG/Run2016B-17Jul2018_ver2-v1/MINIAOD",10, "2016Data"),
-        ("/DoubleEG/Run2016C-17Jul2018-v1/MINIAOD",10, "2016Data"),
-        ("/DoubleEG/Run2016D-17Jul2018-v1/MINIAOD",10, "2016Data"),
-        ("/DoubleEG/Run2016E-17Jul2018-v1/MINIAOD",10, "2016Data"),
-        ("/DoubleEG/Run2016F-17Jul2018-v1/MINIAOD",10, "2016Data"),
-        ("/DoubleEG/Run2016G-17Jul2018-v1/MINIAOD",10, "2016Data"),
-        ("/DoubleEG/Run2016H-17Jul2018-v1/MINIAOD",10, "2016Data"), 
+				("/DoubleEG/Run2016B-ver1_HIPM_UL2016_MiniAODv2-v1/MINIAOD", 10, "2016_Data"),
+				("/DoubleEG/Run2016B-ver2_HIPM_UL2016_MiniAODv2-v3/MINIAOD", 10, "2016_Data"),
+				("/DoubleEG/Run2016C-HIPM_UL2016_MiniAODv2-v1/MINIAOD", 10, "2016_Data"),
+				("/DoubleEG/Run2016D-HIPM_UL2016_MiniAODv2-v1/MINIAOD", 10, "2016_Data"),
+				("/DoubleEG/Run2016E-HIPM_UL2016_MiniAODv2-v1/MINIAOD", 10, "2016_Data"),
+				("/DoubleEG/Run2016F-HIPM_UL2016_MiniAODv2-v1/MINIAOD", 10, "2016_Data"),
+				("/DoubleEG/Run2016F-UL2016_MiniAODv2-v1/MINIAOD", 10, "2016_Data"),
+				("/DoubleEG/Run2016G-UL2016_MiniAODv2-v1/MINIAOD", 10, "2016_Data"),
+				("/DoubleEG/Run2016H-UL2016_MiniAODv2-v1/MINIAOD", 10, "2016_Data"),
         # 2017Data
-        ("/DoubleEG/Run2017B-UL2017_MiniAODv2-v1/MINIAOD",10, "2017Data"),
-        ("/DoubleEG/Run2017D-UL2017_MiniAODv2-v1/MINIAOD",10, "2017Data"),
-        ("/DoubleEG/Run2017F-UL2017_MiniAODv2-v1/MINIAOD",10, "2017Data"),
-        ("/DoubleEG/Run2017C-UL2017_MiniAODv2-v1/MINIAOD",10, "2017Data"),
-        ("/DoubleEG/Run2017E-UL2017_MiniAODv2-v1/MINIAOD",10, "2017Data"),
+				("/DoubleEG/Run2017B-UL2017_MiniAODv2-v1/MINIAOD", 10, "2017_Data"),
+				("/DoubleEG/Run2017C-UL2017_MiniAODv2-v2/MINIAOD", 10, "2017_Data"),
+				("/DoubleEG/Run2017D-UL2017_MiniAODv2-v1/MINIAOD", 10, "2017_Data"),
+				("/DoubleEG/Run2017E-UL2017_MiniAODv2-v1/MINIAOD", 10, "2017_Data"),
+				("/DoubleEG/Run2017F-UL2017_MiniAODv2-v2/MINIAOD", 10, "2017_Data"),
         # 2018Data
-        ("/EGamma/Run2018B-UL2018_MiniAODv2-v1/MINIAOD",10, "2018Data"),
-        ("/EGamma/Run2018D-UL2018_MiniAODv2-v1/MINIAOD",10, "2018Data"),
-        ("/EGamma/Run2018C-UL2018_MiniAODv2-v1/MINIAOD",10, "2018Data"),
-        ("/EGamma/Run2018A-UL2018_MiniAODv2-v1/MINIAOD",10, "2018Data")
-        ] 
+				("/EGamma/Run2018B-UL2018_MiniAODv2-v1/MINIAOD", 10, "2018_Data"),
+				("/EGamma/Run2018C-UL2018_MiniAODv2-v1/MINIAOD", 10, "2018_Data"),
+				("/EGamma/Run2018A-UL2018_MiniAODv2-v1/MINIAOD", 10, "2018_Data"),
+				("/EGamma/Run2018D-UL2018_MiniAODv2-v2/MINIAOD", 10, "2018_Data"),
+] 

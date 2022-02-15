@@ -10,7 +10,8 @@ sys.path.append("/home/users/fsetti/public_html/privateMC_gen")
 from update_pset_NMSSM import edit_pset_NMSSM, edit_pset_gghh, edit_pset_gghh_WW
 from allconfig import *
 
-years = ['2016', '2016_APV', '2017', '2018' ]
+#years = ['2016', '2016_APV', '2017', '2018' ]
+years = ['2016_APV']
 
 condor_submit_params={
         #"sites": "SDSC-PRP", # other_sites can be good_sites, your own list, etc.
@@ -28,7 +29,6 @@ condor_submit_params={
 
 couplings = [ 'cHHH0' , 'cHHH1' , 'cHHH2p45' , 'cHHH5' ]
 decays = [ 'dileptonic' , 'semileptonic' ]
-procs = [ "DiPhotonJetsBox_MGG_80toInf", "DiPhotonJetsBox1BJet_MGG_80toInf", "DiPhotonJetsBox_M40_80" ]
 
 def runall(special_dir, total_nevents, events_per_output):
 
@@ -64,9 +64,9 @@ def runall(special_dir, total_nevents, events_per_output):
 				pset_miniaodsim = signal_UL20[year]["pset_miniaodsim"]
 				scram_arch_miniaodsim = signal_UL20[year]["scram_arch_miniaodsim"]
 				
-				cmssw_v_nanoaodsim = signal_UL20[year]["cmssw_v_nanoaodsim"] 
-				pset_nanoaodsim = signal_UL20[year]["pset_nanoaodsim"]
-				scram_arch_nanoaodsim = signal_UL20[year]["scram_arch_nanoaodsim"]
+				#cmssw_v_nanoaodsim = signal_UL20[year]["cmssw_v_nanoaodsim"] 
+				#pset_nanoaodsim = signal_UL20[year]["pset_nanoaodsim"]
+				#scram_arch_nanoaodsim = signal_UL20[year]["scram_arch_nanoaodsim"]
 				
 				tag = 'GluGluToHHTo2G2Tau_node_' + coupling + '_TuneCP5_13TeV-powheg-pythia8_' + year
 				
@@ -86,7 +86,7 @@ def runall(special_dir, total_nevents, events_per_output):
 				if '2016' in year:
 					total_nevents_tmp /= 2
 
-				'''				
+				'''
 				step1 = CMSSWTask(
 				        # Change dataset to something more meaningful (but keep STEP1, as we use this 
 				        # for string replacement later); keep N=1
@@ -169,7 +169,6 @@ def runall(special_dir, total_nevents, events_per_output):
 				        scram_arch = scram_arch_reco,
 				        condor_submit_params =  condor_submit_params
 				        )
-				'''				
 				
 				step6 = CMSSWTask(
 				        sample = DirectorySample(
@@ -187,7 +186,7 @@ def runall(special_dir, total_nevents, events_per_output):
 				        scram_arch = scram_arch_miniaodsim,
 				        condor_submit_params =  condor_submit_params
 				        )
-				'''			
+
 				step7 = CMSSWTask(
 				        sample = DirectorySample(
 				            location = step6.get_outputdir(),
@@ -204,6 +203,24 @@ def runall(special_dir, total_nevents, events_per_output):
 				        condor_submit_params =  condor_submit_params
 				        )
 				'''			
+				dat_s6	= '/' + tag + '_STEP6'				
+				loc_s6	= '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL' + '/' + tag + '_STEP5' + '_' + proc_tag
+				step6 = CMSSWTask(
+				        sample = DirectorySample(
+				            location = loc_s6,
+				            dataset = dat_s6,
+				            ),
+				        tag = proc_tag,
+				        special_dir = special_dir,
+				        open_dataset = True,
+				        #files_per_output = 1,
+				        files_per_output = 2,
+				        #output_name = "step6.root",
+				        pset = "cmsDrivers/UL20/ggf/" + pset_miniaodsim,
+				        cmssw_version = cmssw_v_miniaodsim,
+				        scram_arch = scram_arch_miniaodsim,
+				        condor_submit_params =  condor_submit_params
+				        )
 				
 				total_summary = {}
 				#for task in [step1,step2,step3,step4,step5,step6]:
@@ -269,7 +286,7 @@ def runall(special_dir, total_nevents, events_per_output):
 					if '2016' in year:
 						total_nevents_tmp /= 2
 					
-					'''				
+					'''
 					step1 = CMSSWTask(
 					        # Change dataset to something more meaningful (but keep STEP1, as we use this 
 					        # for string replacement later); keep N=1
@@ -352,7 +369,6 @@ def runall(special_dir, total_nevents, events_per_output):
 					        scram_arch = scram_arch_reco,
 					        condor_submit_params =  condor_submit_params
 					        )
-					'''				
 					
 					step6 = CMSSWTask(
 					        sample = DirectorySample(
@@ -371,7 +387,6 @@ def runall(special_dir, total_nevents, events_per_output):
 					        condor_submit_params =  condor_submit_params
 					        )
 
-					'''
 					step7 = CMSSWTask(
 					        sample = DirectorySample(
 					            location = step6.get_outputdir(),
@@ -388,6 +403,25 @@ def runall(special_dir, total_nevents, events_per_output):
 					        condor_submit_params =  condor_submit_params
 					        )
 					'''
+
+					dat_s6	= '/' + tag + '_STEP6'				
+					loc_s6	= '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL' + '/' + tag + '_STEP5' + '_' + proc_tag
+					step6 = CMSSWTask(
+					        sample = DirectorySample(
+					            location = loc_s6,
+					            dataset = dat_s6,
+					            ),
+					        tag = proc_tag,
+					        special_dir = special_dir,
+					        open_dataset = True,
+					        #files_per_output = 1,
+					        files_per_output = 2,
+					        #output_name = "step6.root",
+					        pset = "cmsDrivers/UL20/ggf/" + pset_miniaodsim,
+					        cmssw_version = cmssw_v_miniaodsim,
+					        scram_arch = scram_arch_miniaodsim,
+					        condor_submit_params =  condor_submit_params
+					        )
 					
 					total_summary = {}
 					#for task in [step1,step2,step3,step4,step5,step6]:
