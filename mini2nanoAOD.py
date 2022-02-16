@@ -17,7 +17,7 @@ parser.add_argument("--skip_local", help = "don't submit jobs for local samples"
 parser.add_argument("--skip_central", help = "don't submit jobs for central samples", action = "store_true")
 args = parser.parse_args()
 
-from dsdefs_centralminiaod_UL import dsdefs_data
+from dsdefs_centralminiaod_UL import dsdefs_data, dsdefs_MC_latest
 # for local inputs
 local_sets = []
 
@@ -139,7 +139,7 @@ while True:
             json.dump(total_summary, f_out, indent=4, sort_keys=True)
 
     # Loop through central samples
-    for ds,fpo,args in dsdefs_data[:]:
+    for ds,fpo,args in dsdefs_MC_latest[:] + dsdefs_data[:] :
         if skip_central: continue
         if (job_filter != "") and (args not in job_filter) : continue         
         if (ds_filter != "") and (ds_filter not in ds) : continue         
