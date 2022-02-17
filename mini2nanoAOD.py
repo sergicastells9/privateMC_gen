@@ -139,7 +139,8 @@ while True:
             json.dump(total_summary, f_out, indent=4, sort_keys=True)
 
     # Loop through central samples
-    for ds,fpo,args in dsdefs_MC_latest[:] + dsdefs_data[:] :
+    for ds,fpo,args in dsdefs_MC_latest[:]:
+    #for ds,fpo,args in dsdefs_MC_latest[:] + dsdefs_data[:] :
         if skip_central: continue
         if (job_filter != "") and (args not in job_filter) : continue         
         if (ds_filter != "") and (ds_filter not in ds) : continue         
@@ -157,7 +158,7 @@ while True:
                 tarfile = "./package.tar.gz",
                 condor_submit_params = {"sites": "T2_US_UCSD,T2_US_CALTECH,T2_US_WISCONSIN,T2_US_Vanderbilt,T2_US_Florida", # other_sites can be good_sites, your own list, etc.
                     "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel7-m202006"]],
-										#"use_xrootd":True
+										"use_xrootd":True
 								},
                 special_dir = hadoop_path,
                 arguments = args.replace(" ","|")
@@ -179,6 +180,6 @@ while True:
         print "Job={} finished".format(job_tag)
         print ""
         break
-    sleep_time	= 60 * 60
+    sleep_time	= 2 * 60 * 60
     print "Sleeping " + str(sleep_time / 60) + " minutes ..."
     time.sleep(sleep_time)

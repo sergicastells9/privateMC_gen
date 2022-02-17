@@ -10,8 +10,16 @@ sys.path.append("/home/users/fsetti/public_html/privateMC_gen")
 from update_pset_NMSSM import edit_pset_graviton
 from allconfig import *
 
-years = ['2016', '2016_APV', '2017', '2018' ]
-#years = ['2016', '2016_APV']
+#years = ['2016', '2016_APV', '2017', '2018' ]
+
+############################################################################
+############################################################################
+#################     only submit 17/18 since low space on hadoop!!!!!	####
+years = ['2017', '2018' ]		
+############################################################################
+############################################################################
+
+
 
 condor_submit_params={
         #"sites": "SDSC-PRP", # other_sites can be good_sites, your own list, etc.
