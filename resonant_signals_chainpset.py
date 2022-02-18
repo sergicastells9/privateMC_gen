@@ -23,7 +23,7 @@ years = ['2017', '2018' ]
 
 condor_submit_params={
         #"sites": "SDSC-PRP", # other_sites can be good_sites, your own list, etc.
-        "sites": "T2_US_UCSD,T2_US_CALTECH,T2_US_WISCONSIN,T2_US_Vanderbilt,T2_US_Florida", # other_sites can be good_sites, your own list, etc.
+        "sites": "T2_US_UCSD,T2_US_CALTECH,T2_US_WISCONSIN,T2_US_MIT,T2_US_Florida", # other_sites can be good_sites, your own list, etc.
         "classads": [
             ["RequestK8SNamespace", "cms-ucsd-t2"], 
             ["SingularityImage", "/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel7"]
@@ -37,7 +37,7 @@ condor_submit_params={
 
 graviton_masses = [ '250', '300', '320', '350', '400', '450', '500', '600', '800', '1000', '2000'  ]
 #graviton_masses = [ '250']
-
+radion_masses	= [ '260', '270', '280', '290', '300', '350', '400', '500', '700', '1000' ]
 def runall(special_dir, total_nevents, events_per_output):
 
 	for _ in range(2500):
@@ -46,6 +46,8 @@ def runall(special_dir, total_nevents, events_per_output):
 
 		#Produce resonant samples for IC people
 		for proc in resonant_signals.keys() :
+			if proc != "GluGluToBulkGravitonToHHTo2G2Tau":
+				continue
 			for year in years:
 				for graviton_mass in graviton_masses:
 
@@ -228,7 +230,7 @@ def runall(special_dir, total_nevents, events_per_output):
 					    total_summary[task.get_sample().get_datasetname()] = summary
 					StatsParser(data=total_summary, webdir="~/public_html/dump/metis_miniAODv2/").do()     
 
-		time.sleep(10*60)
+		time.sleep( 2 * 60 * 60 )
 
 
 runall("nanoAOD_runII_20UL", 400000, 250)
