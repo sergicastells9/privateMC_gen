@@ -139,8 +139,8 @@ while True:
             json.dump(total_summary, f_out, indent=4, sort_keys=True)
 
     # Loop through central samples
-    for ds,fpo,args in dsdefs_MC_latest[:]:
-    #for ds,fpo,args in dsdefs_MC_latest[:] + dsdefs_data[:] :
+    #for ds,fpo,args in dsdefs_MC_latest[:]:
+    for ds,fpo,args in dsdefs_MC_latest[:] + dsdefs_data[17:] :
         if skip_central: continue
         if (job_filter != "") and (args not in job_filter) : continue         
         if (ds_filter != "") and (ds_filter not in ds) : continue         

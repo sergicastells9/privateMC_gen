@@ -15,7 +15,7 @@ from allconfig import *
 ############################################################################
 ############################################################################
 #################     only submit 17/18 since low space on hadoop!!!!!	####
-years = ['2017', '2018' ]		
+years = ['2018' ]		
 ############################################################################
 ############################################################################
 
@@ -23,7 +23,7 @@ years = ['2017', '2018' ]
 
 condor_submit_params={
         #"sites": "SDSC-PRP", # other_sites can be good_sites, your own list, etc.
-        "sites": "T2_US_UCSD,T2_US_CALTECH,T2_US_WISCONSIN,T2_US_MIT,T2_US_Florida", # other_sites can be good_sites, your own list, etc.
+        "sites": "T2_US_UCSD,T2_US_CALTECH,T2_US_WISCONSIN,T2_US_Florida", # other_sites can be good_sites, your own list, etc.
         "classads": [
             ["RequestK8SNamespace", "cms-ucsd-t2"], 
             ["SingularityImage", "/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel7"]
@@ -35,8 +35,8 @@ condor_submit_params={
 
 #condor_submit_params = {"sites" : "T2_US_UCSD,T2_US_CALTECH,T2_US_MIT,T2_US_WISCONSIN,T2_US_Nebraska,T2_US_Purdue,T2_US_Vanderbilt,T2_US_Florida",
 
-graviton_masses = [ '250', '300', '320', '350', '400', '450', '500', '600', '800', '1000', '2000'  ]
-#graviton_masses = [ '250']
+graviton_masses = [ '500', '600', '800', '1000', '2000' ]
+#graviton_masses = [ '250', '300', '320', '350', '400', '450', '500', '600', '800', '1000', '2000'  ]
 radion_masses	= [ '260', '270', '280', '290', '300', '350', '400', '500', '700', '1000' ]
 def runall(special_dir, total_nevents, events_per_output):
 

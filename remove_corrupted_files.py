@@ -44,15 +44,15 @@ from glob import glob
 #check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GJets_DoubleEMEnriched_PtG_20MGG_40To80*/*.root'
 #check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GJets_DoubleEMEnriched_PtG_20MGG-80*/*.root'
 
-#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M1*_2017*/*.root'
-#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M2*_2017*/*.root'
-#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M3*_2017*/*.root'
-#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M4*_2017*/*.root'
-#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M5*_2017*/*.root'
-#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M6*_2017*/*.root'
-#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M7*_2017*/*.root'
-#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M8*_2017*/*.root'
-check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M9*_2017*/*.root'
+#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M1*_2018*/*.root'
+#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M2*_2018*/*.root'
+#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M3*_2018*/*.root'
+#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M4*_2018*/*.root'
+#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M5*_2018*/*.root'
+#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M6*_2018*/*.root'
+#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M7*_2018*/*.root'
+#check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M8*_2018*/*.root'
+check_dir = '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M9*_2018*/*.root'
 
 for ifile in glob(check_dir):
 	try:
