@@ -10,8 +10,8 @@ sys.path.append("/home/users/fsetti/public_html/privateMC_gen")
 from update_pset_NMSSM import edit_pset_NMSSM, edit_pset_gghh, edit_pset_gghh_WW
 from allconfig import *
 
-#years = ['2016', '2016_APV', '2017', '2018' ]
-years = ['2016_APV']
+years = ['2016', '2016_APV', '2017', '2018' ]
+#years = ['2017']
 
 condor_submit_params={
         #"sites": "SDSC-PRP", # other_sites can be good_sites, your own list, etc.
@@ -27,21 +27,23 @@ condor_submit_params={
 
 #condor_submit_params = {"sites" : "T2_US_UCSD,T2_US_CALTECH,T2_US_MIT,T2_US_WISCONSIN,T2_US_Nebraska,T2_US_Purdue,T2_US_Vanderbilt,T2_US_Florida",
 
-couplings = [ 'cHHH0' , 'cHHH1' , 'cHHH2p45' , 'cHHH5' ]
+#couplings = [ 'cHHH0' , 'cHHH1' , 'cHHH2p45' , 'cHHH5' ]
+couplings = [ 'cHHH2p45' , 'cHHH5']
+#decays = [ 'dileptonic' ]
 decays = [ 'dileptonic' , 'semileptonic' ]
 
 def runall(special_dir, total_nevents, events_per_output):
 
 	for _ in range(2500):
 
-		proc_tag = "v1"
+		proc_tag = "v2"
 
 		for coupling in couplings:
 			for year in years:
 			
 				cmssw_v_gen = signal_UL20[year]["cmssw_v_gen"] 
 				pset_gen = signal_UL20[year]["pset_gen"]
-				pset_gen.replace('_1_cfg.py','_1_cfg_%s.py'%(coupling))
+				pset_gen = pset_gen.replace('_1_cfg.py','_1_cfg_%s.py'%(coupling))
 				scram_arch_gen = signal_UL20[year]["scram_arch_gen"]
 				
 				cmssw_v_sim = signal_UL20[year]["cmssw_v_sim"] 
@@ -64,20 +66,8 @@ def runall(special_dir, total_nevents, events_per_output):
 				pset_miniaodsim = signal_UL20[year]["pset_miniaodsim"]
 				scram_arch_miniaodsim = signal_UL20[year]["scram_arch_miniaodsim"]
 				
-				#cmssw_v_nanoaodsim = signal_UL20[year]["cmssw_v_nanoaodsim"] 
-				#pset_nanoaodsim = signal_UL20[year]["pset_nanoaodsim"]
-				#scram_arch_nanoaodsim = signal_UL20[year]["scram_arch_nanoaodsim"]
 				
 				tag = 'GluGluToHHTo2G2Tau_node_' + coupling + '_TuneCP5_13TeV-powheg-pythia8_' + year
-				
-				#for some reason the directories are not created in the script :( 
-				os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP1_%s"%(special_dir,tag,proc_tag))
-				os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP2_%s"%(special_dir,tag,proc_tag))
-				os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP3_%s"%(special_dir,tag,proc_tag))
-				os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP4_%s"%(special_dir,tag,proc_tag))
-				os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP5_%s"%(special_dir,tag,proc_tag))
-				os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP6_%s"%(special_dir,tag,proc_tag))
-				os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP7_%s"%(special_dir,tag,proc_tag))
 				
 				edit_pset_gghh( coupling, 'cHHH1' , year  )	
 				
@@ -86,7 +76,6 @@ def runall(special_dir, total_nevents, events_per_output):
 				if '2016' in year:
 					total_nevents_tmp /= 2
 
-				'''
 				step1 = CMSSWTask(
 				        # Change dataset to something more meaningful (but keep STEP1, as we use this 
 				        # for string replacement later); keep N=1
@@ -187,6 +176,7 @@ def runall(special_dir, total_nevents, events_per_output):
 				        condor_submit_params =  condor_submit_params
 				        )
 
+				'''			
 				step7 = CMSSWTask(
 				        sample = DirectorySample(
 				            location = step6.get_outputdir(),
@@ -202,7 +192,6 @@ def runall(special_dir, total_nevents, events_per_output):
 				        scram_arch = scram_arch_nanoaodsim,
 				        condor_submit_params =  condor_submit_params
 				        )
-				'''			
 				dat_s6	= '/' + tag + '_STEP6'				
 				loc_s6	= '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL' + '/' + tag + '_STEP5' + '_' + proc_tag
 				step6 = CMSSWTask(
@@ -221,10 +210,11 @@ def runall(special_dir, total_nevents, events_per_output):
 				        scram_arch = scram_arch_miniaodsim,
 				        condor_submit_params =  condor_submit_params
 				        )
+				'''			
 				
 				total_summary = {}
-				#for task in [step1,step2,step3,step4,step5,step6]:
-				for task in [step6]:
+				for task in [step1,step2,step3,step4,step5,step6]:
+				#for task in [step6]:
 				    task.process()
 				    summary = task.get_task_summary()
 				    total_summary[task.get_sample().get_datasetname()] = summary
@@ -237,7 +227,7 @@ def runall(special_dir, total_nevents, events_per_output):
 	
 					cmssw_v_gen = signal_UL20[year]["cmssw_v_gen"] 
 					pset_gen = signal_UL20[year]["pset_gen"]
-					pset_gen.replace('_1_cfg.py','_1_cfg_%s.py'%(coupling))
+					pset_gen = pset_gen.replace('_1_cfg.py','_1_cfg_%s.py'%(coupling))
 					scram_arch_gen = signal_UL20[year]["scram_arch_gen"]
 					
 					cmssw_v_sim = signal_UL20[year]["cmssw_v_sim"] 
@@ -260,33 +250,19 @@ def runall(special_dir, total_nevents, events_per_output):
 					pset_miniaodsim = signal_UL20[year]["pset_miniaodsim"]
 					scram_arch_miniaodsim = signal_UL20[year]["scram_arch_miniaodsim"]
 					
-					#cmssw_v_nanoaodsim = signal_UL20[year]["cmssw_v_nanoaodsim"] 
-					#pset_nanoaodsim = signal_UL20[year]["pset_nanoaodsim"]
-					#scram_arch_nanoaodsim = signal_UL20[year]["scram_arch_nanoaodsim"]
-					
 					edit_pset_gghh_WW( coupling, 'cHHH1' , year, decay  )	
 
-					tag = ''					
-					if coupling == 'cHHH1':
-						tag = 'GluGluToHHTo2G2W_' + decay + '_node_SM_'+ year
-					else :
-						tag = 'GluGluToHHTo2G2W_' + decay + '_node_' + str(coupling) + '_'+ year
-					
-					#for some reason the directories are not created in the script :( 
-					os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP1_%s"%(special_dir,tag,proc_tag))
-					os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP2_%s"%(special_dir,tag,proc_tag))
-					os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP3_%s"%(special_dir,tag,proc_tag))
-					os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP4_%s"%(special_dir,tag,proc_tag))
-					os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP5_%s"%(special_dir,tag,proc_tag))
-					os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP6_%s"%(special_dir,tag,proc_tag))
-					os.system("mkdir -p /hadoop/cms/store/user/fsetti/%s/%s_STEP7_%s"%(special_dir,tag,proc_tag))
+					tag = 'GluGluToHHTo2G2W_' + decay + '_node_' + str(coupling) + '_'+ year
+					#if coupling == 'cHHH1':
+					#	tag = 'GluGluToHHTo2G2W_' + decay + '_node_SM_'+ year
+					#else :
+					#	tag = 'GluGluToHHTo2G2W_' + decay + '_node_' + str(coupling) + '_'+ year
 					
 					total_nevents_tmp = total_nevents
 					
 					if '2016' in year:
 						total_nevents_tmp /= 2
 					
-					'''
 					step1 = CMSSWTask(
 					        # Change dataset to something more meaningful (but keep STEP1, as we use this 
 					        # for string replacement later); keep N=1
@@ -304,7 +280,8 @@ def runall(special_dir, total_nevents, events_per_output):
 					        pset = "cmsDrivers/UL20/HHTo2G2l2nu/"+decay+"/" + pset_gen,
 					        cmssw_version = cmssw_v_gen,
 					        scram_arch = scram_arch_gen,
-					        condor_submit_params =  condor_submit_params
+					        condor_submit_params =  condor_submit_params,
+									#use_hadoop = True
 					       )
 					
 					step2 = CMSSWTask(
@@ -319,7 +296,8 @@ def runall(special_dir, total_nevents, events_per_output):
 					        pset = "cmsDrivers/UL20/ggf/" + pset_sim,
 					        cmssw_version = cmssw_v_sim,
 					        scram_arch = scram_arch_sim,
-					        condor_submit_params =  condor_submit_params
+					        condor_submit_params =  condor_submit_params,
+									#use_hadoop = True
 					        )
 					
 					step3 = CMSSWTask(
@@ -334,7 +312,8 @@ def runall(special_dir, total_nevents, events_per_output):
 					        pset = "cmsDrivers/UL20/ggf/" + pset_mix,
 					        cmssw_version = cmssw_v_mix,
 					        scram_arch = scram_arch_mix,
-					        condor_submit_params =  condor_submit_params
+					        condor_submit_params =  condor_submit_params,
+									#use_hadoop = True
 					        )
 					
 					step4 = CMSSWTask(
@@ -351,7 +330,8 @@ def runall(special_dir, total_nevents, events_per_output):
 					        pset = "cmsDrivers/UL20/ggf/" + pset_hlt,
 					        cmssw_version = cmssw_v_hlt,
 					        scram_arch = scram_arch_hlt,
-					        condor_submit_params =  condor_submit_params
+					        condor_submit_params =  condor_submit_params,
+									#use_hadoop = True
 					        )
 					
 					step5 = CMSSWTask(
@@ -367,7 +347,8 @@ def runall(special_dir, total_nevents, events_per_output):
 					        pset = "cmsDrivers/UL20/ggf/" + pset_reco,
 					        cmssw_version = cmssw_v_reco,
 					        scram_arch = scram_arch_reco,
-					        condor_submit_params =  condor_submit_params
+					        condor_submit_params =  condor_submit_params,
+									#use_hadoop = True
 					        )
 					
 					step6 = CMSSWTask(
@@ -384,9 +365,10 @@ def runall(special_dir, total_nevents, events_per_output):
 					        pset = "cmsDrivers/UL20/ggf/" + pset_miniaodsim,
 					        cmssw_version = cmssw_v_miniaodsim,
 					        scram_arch = scram_arch_miniaodsim,
-					        condor_submit_params =  condor_submit_params
+					        condor_submit_params =  condor_submit_params,
+									#use_hadoop = True
 					        )
-
+					'''
 					step7 = CMSSWTask(
 					        sample = DirectorySample(
 					            location = step6.get_outputdir(),
@@ -402,7 +384,6 @@ def runall(special_dir, total_nevents, events_per_output):
 					        scram_arch = scram_arch_nanoaodsim,
 					        condor_submit_params =  condor_submit_params
 					        )
-					'''
 
 					dat_s6	= '/' + tag + '_STEP6'				
 					loc_s6	= '/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL' + '/' + tag + '_STEP5' + '_' + proc_tag
@@ -422,17 +403,18 @@ def runall(special_dir, total_nevents, events_per_output):
 					        scram_arch = scram_arch_miniaodsim,
 					        condor_submit_params =  condor_submit_params
 					        )
+					'''
 					
 					total_summary = {}
-					#for task in [step1,step2,step3,step4,step5,step6]:
-					for task in [step6]:
+					for task in [step1,step2,step3,step4,step5,step6]:
+					#for task in [step6]:
 					    task.process()
 					    summary = task.get_task_summary()
 					    total_summary[task.get_sample().get_datasetname()] = summary
 					StatsParser(data=total_summary, webdir="~/public_html/dump/metis/").do()
 
-		time.sleep(60*60)
+		time.sleep(90*60)
 
 
 runall("nanoAOD_runII_20UL", 400000, 250)
-#runall("nanoAOD_runII_20UL_test", 10000, 250)
+#runall("nanoAOD_runII_20UL_test", 1, 1)

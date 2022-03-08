@@ -7,15 +7,15 @@ import time
 
 import sys
 sys.path.append("/home/users/fsetti/public_html/privateMC_gen")
-from update_pset_NMSSM import edit_pset_graviton
+from update_pset_NMSSM import edit_pset_graviton, edit_pset_radion
 from allconfig import *
 
-#years = ['2016', '2016_APV', '2017', '2018' ]
+years = ['2016', '2016_APV', '2017', '2018' ]
 
 ############################################################################
 ############################################################################
 #################     only submit 17/18 since low space on hadoop!!!!!	####
-years = ['2018' ]		
+#years = ['2018' ]		
 ############################################################################
 ############################################################################
 
@@ -23,7 +23,7 @@ years = ['2018' ]
 
 condor_submit_params={
         #"sites": "SDSC-PRP", # other_sites can be good_sites, your own list, etc.
-        "sites": "T2_US_UCSD,T2_US_CALTECH,T2_US_WISCONSIN,T2_US_Florida", # other_sites can be good_sites, your own list, etc.
+        "sites": "T2_US_UCSD,T2_US_CALTECH,T2_US_WISCONSIN,T2_US_Florida,T2_US_MIT,T2_US_Nebraska,T2_US_Purdue,T2_US_Vanderbilt", # other_sites can be good_sites, your own list, etc.
         "classads": [
             ["RequestK8SNamespace", "cms-ucsd-t2"], 
             ["SingularityImage", "/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel7"]
@@ -35,22 +35,24 @@ condor_submit_params={
 
 #condor_submit_params = {"sites" : "T2_US_UCSD,T2_US_CALTECH,T2_US_MIT,T2_US_WISCONSIN,T2_US_Nebraska,T2_US_Purdue,T2_US_Vanderbilt,T2_US_Florida",
 
-#graviton_masses = [ '250', '300', '320', '350', '400', '450', '500', '600', '800', '1000', '2000'  ]
-radion_masses	= [ '260', '270', '280', '290', '300', '350', '400', '500', '700', '1000' ]
+#graviton_masses = [ '250', '300', '320', '350', '400', '450', '500', '800', '1000', '2000'  ]
+graviton_masses = [ '250', '300', '320', '350', '400', '450' ]
+#radion_masses	= [ '260', '270', '280', '290', '300', '350', '400', '500', '700', '1000' ]
+#radion_masses	= [ '260']
 def runall(special_dir, total_nevents, events_per_output):
 
 	for _ in range(2500):
 
-		proc_tag = "v1"
+		proc_tag = "v2"
 
 		#Produce resonant samples for IC people
 		for proc in resonant_signals.keys() :
-			if proc != "GluGluToBulkGravitonToHHTo2G2Tau":
+			if "Graviton" not in proc:
 				continue
 			for year in years:
-				for graviton_mass in graviton_masses:
+				for mass in graviton_masses:
 
-					coupling	= 'M'+str(graviton_mass)
+					coupling	= 'M'+str(mass)
 					tag = str(proc) + "_" + coupling + '_' + year
 					total_nevents_tmp = total_nevents				
 					steps = []
@@ -61,10 +63,10 @@ def runall(special_dir, total_nevents, events_per_output):
 					try:
 						cmssw_v_gen = resonant_signals[proc][year]["cmssw_v_gen"] 
 						pset_gen = resonant_signals[proc][year]["pset_gen"]
-						pset_gen.replace('_1_cfg.py','_1_cfg_%s.py'%(coupling))
+						pset_gen = pset_gen.replace('_1_cfg.py','_1_cfg_%s.py'%(coupling))
 						scram_arch_gen = resonant_signals[proc][year]["scram_arch_gen"]
 						
-						edit_pset_graviton( coupling, 'M300' , year  )	
+						edit_pset_radion( coupling, 'M300' , year  )	
 					
 						step1 = CMSSWTask(
 						        # Change dataset to something more meaningful (but keep STEP1, as we use this 
@@ -229,7 +231,7 @@ def runall(special_dir, total_nevents, events_per_output):
 					    total_summary[task.get_sample().get_datasetname()] = summary
 					StatsParser(data=total_summary, webdir="~/public_html/dump/metis_miniAODv2/").do()     
 
-		time.sleep( 2 * 60 * 60 )
+		time.sleep( 90 * 60 )
 
 
 runall("nanoAOD_runII_20UL", 400000, 250)
