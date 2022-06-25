@@ -22,6 +22,7 @@ from dsdefs_centralminiaod_UL import dsdefs_data, dsdefs_MC_latest
 local_sets = []
 
 # some job configurations
+#job_dir = "Summer20UL_nanoAODv9_fixRho/"
 job_dir = "Summer20UL_nanoAODv9/"
 job_tag = args.tag
 job_filter = args.filter
@@ -34,7 +35,7 @@ cmssw_ver = "CMSSW_10_6_26"
 DOSKIM = False 
 
 #exec_path = "condor_exe_%s.sh" % args.tag
-exec_path = "condor_exe.sh"
+exec_path = "condor_exe_ceph.sh"
 #tar_path = "nanoAOD_package_%s.tar.gz" % args.tag
 
 if not args.soft_rerun:
@@ -47,7 +48,7 @@ while True:
     allcomplete = True
 
     # Loop through central samples
-    for ds,fpo,args in dsdefs_data[:17]:
+    for ds,fpo,args in dsdefs_data[:]:
         if skip_central: continue
         if (job_filter != "") and (args not in job_filter) : continue         
         if (ds_filter != "") and (ds_filter not in ds) : continue         
@@ -87,6 +88,6 @@ while True:
         print "Job={} finished".format(job_tag)
         print ""
         break
-    sleep_time	= 2 * 60 * 60
+    sleep_time	= 90 * 60
     print "Sleeping " + str(sleep_time / 60) + " minutes ..."
     time.sleep(sleep_time)

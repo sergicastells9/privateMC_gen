@@ -13,199 +13,35 @@ parser.add_argument("--tag", help = "tag to identify this set of babies", type=s
 parser.add_argument("--filter", help = "only process mc/data with some requirement (e.g. 2016MC, 2017Data)", default="", type=str)
 parser.add_argument("--dsfilter", help = "only process mc/data with some name pattern(e.g. DY***)", default="", type=str)
 parser.add_argument("--soft_rerun", help = "don't remake tarball", action="store_true")
-parser.add_argument("--skip_local", help = "don't submit jobs for local samples", action = "store_true")
-parser.add_argument("--skip_central", help = "don't submit jobs for central samples", action = "store_true")
 args = parser.parse_args()
 
-from dsdefs_centralminiaod_UL import dsdefs_data, dsdefs_MC_latest
-# for local inputs
-local_sets = []
-
-
-if not args.skip_local:
- 	local_sets = [
-		#("DiPhotonJetsBox1BJet_MGG_80toInf_2016_APV"																						, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/DiPhotonJetsBox1BJet_MGG_80toInf_2016_APV_STEP6_v1/"																			, 10, "2016_APV_MC"),
-		#("DiPhotonJetsBox_M40_80_2016_APV"																											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/DiPhotonJetsBox_M40_80_2016_APV_STEP6_v1/"																								, 10, "2016_APV_MC"),
-		#("DiPhotonJetsBox_M40_80_2016"																													, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/DiPhotonJetsBox_M40_80_2016_STEP6_v1/"																										, 10, "2016_MC"),
-		#("DiPhotonJetsBox_MGG_80toInf_2016_APV"																									, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/DiPhotonJetsBox_MGG_80toInf_2016_APV_STEP6_v1/"																						, 10, "2016_APV_MC"),
-		#("GJets_DoubleEMEnriched_PtG_20MGG_40To80_TuneCP5_13TeV_madgraphMLM_pythia8_2016_APV"		, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GJets_DoubleEMEnriched_PtG_20MGG_40To80_TuneCP5_13TeV_madgraphMLM_pythia8_2016_APV_STEP6_v1/", 10, "2016_APV_MC"),
-		#("GJets_DoubleEMEnriched_PtG_20MGG_40To80_TuneCP5_13TeV_madgraphMLM_pythia8_2016"				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GJets_DoubleEMEnriched_PtG_20MGG_40To80_TuneCP5_13TeV_madgraphMLM_pythia8_2016_STEP6_v1/"	, 10, "2016_MC"),
-		#("GJets_DoubleEMEnriched_PtG_40MGG_80_TuneCP5_13TeV_madgraphMLM_pythia8_2016_APV"				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GJets_DoubleEMEnriched_PtG_40MGG_80_TuneCP5_13TeV_madgraphMLM_pythia8_2016_APV_STEP6_v1/"	, 10, "2016_APV_MC"),
-		#("GJets_DoubleEMEnriched_PtG_40MGG_80_TuneCP5_13TeV_madgraphMLM_pythia8_2016"						, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GJets_DoubleEMEnriched_PtG_40MGG_80_TuneCP5_13TeV_madgraphMLM_pythia8_2016_STEP6_v1/"			, 10, "2016_MC"),
-		#("TGJets_TuneCP5_13TeV-amcatnlo-madspin-pythia8_2016"																		, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/TGJets_TuneCP5_13TeV-amcatnlo-madspin-pythia8_2016_STEP6_v1/"											, 10, "2016_MC"),
-		#
-		#("GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2016_APV"									, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2016_APV_STEP6_v1/"		, 10, "2016_APV_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2016"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2016_STEP6_v1/"				, 10, "2016_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2017"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2017_STEP6_v1/"				, 10, "2017_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2018"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH0_TuneCP5_13TeV-powheg-pythia8_2018_STEP6_v1/"				, 10, "2018_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2016_APV"									, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2016_APV_STEP6_v1/"		, 10, "2016_APV_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2016"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2016_STEP6_v1/"				, 10, "2016_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2017"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2017_STEP6_v1/"				, 10, "2017_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2018"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2018_STEP6_v1/"				, 10, "2018_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2016_APV"								, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2016_APV_STEP6_v1/"	, 10, "2016_APV_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2016"										, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2016_STEP6_v1/"			, 10, "2016_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2017"										, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2017_STEP6_v1/"			, 10, "2017_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2018"										, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH2p45_TuneCP5_13TeV-powheg-pythia8_2018_STEP6_v1/"			, 10, "2018_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2016_APV"									, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2016_APV_STEP6_v1/"		, 10, "2016_APV_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2016"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2016_STEP6_v1/"				, 10, "2016_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2017"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2017_STEP6_v1/"				, 10, "2017_MC"),
-		#("GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2018"											, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2Tau_node_cHHH5_TuneCP5_13TeV-powheg-pythia8_2018_STEP6_v1/"				, 10, "2018_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_cHHH0_2016_APV"																			, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH0_2016_APV_STEP6_v1/"												, 10, "2016_APV_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_cHHH0_2016"																					, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH0_2016_STEP6_v1/"														, 10, "2016_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_cHHH0_2017"																					, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH0_2017_STEP6_v1/"														, 10, "2017_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_cHHH0_2018"																					, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH0_2018_STEP6_v1/"														, 10, "2018_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_SM_2016_APV"																					, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_SM_2016_APV_STEP6_v1/"														, 10, "2016_APV_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_SM_2016"																							, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_SM_2016_STEP6_v1/"																, 10, "2016_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_SM_2017"																							, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_SM_2017_STEP6_v1/"																, 10, "2017_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_SM_2018"																							, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_SM_2018_STEP6_v1/"																, 10, "2018_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2016_APV"																		, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2016_APV_STEP6_v1/"											, 10, "2016_APV_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2016"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2016_STEP6_v1/"													, 10, "2016_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2017"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2017_STEP6_v1/"													, 10, "2017_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2018"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH2p45_2018_STEP6_v1/"													, 10, "2018_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_cHHH5_2016_APV"																			, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH5_2016_APV_STEP6_v1/"												, 10, "2016_APV_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_cHHH5_2016"																					, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH5_2016_STEP6_v1/"														, 10, "2016_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_cHHH5_2017"																					, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH5_2017_STEP6_v1/"														, 10, "2017_MC"),
-		#("GluGluToHHTo2G2W_dileptonic_node_cHHH5_2018"																					, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_dileptonic_node_cHHH5_2018_STEP6_v1/"														, 10, "2018_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_cHHH0_2016_APV"																		, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH0_2016_APV_STEP6_v1/"											, 10, "2016_APV_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_cHHH0_2016"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH0_2016_STEP6_v1/"													, 10, "2016_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_cHHH0_2017"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH0_2017_STEP6_v1/"													, 10, "2017_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_cHHH0_2018"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH0_2018_STEP6_v1/"													, 10, "2018_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_SM_2016_APV"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_SM_2016_APV_STEP6_v1/"													, 10, "2016_APV_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_SM_2016"																						, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_SM_2016_STEP6_v1/"															, 10, "2016_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_SM_2017"																						, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_SM_2017_STEP6_v1/"															, 10, "2017_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_SM_2018"																						, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_SM_2018_STEP6_v1/"															, 10, "2018_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2016_APV"																	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2016_APV_STEP6_v1/"										, 10, "2016_APV_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2016"																			, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2016_STEP6_v1/"												, 10, "2016_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2017"																			, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2017_STEP6_v1/"												, 10, "2017_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2018"																			, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH2p45_2018_STEP6_v1/"												, 10, "2018_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_cHHH5_2016_APV"																		, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH5_2016_APV_STEP6_v1/"											, 10, "2016_APV_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_cHHH5_2016"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH5_2016_STEP6_v1/"													, 10, "2016_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_cHHH5_2017"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH5_2017_STEP6_v1/"													, 10, "2017_MC"),
-		#("GluGluToHHTo2G2W_semileptonic_node_cHHH5_2018"																				, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToHHTo2G2W_semileptonic_node_cHHH5_2018_STEP6_v1/"													, 10, "2018_MC"),
-
-
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M250_2016_APV"                                    	 	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M250_2016_APV_STEP6_v1/"                       , 10, "2016_APV_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M250_2016"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M250_2016_STEP6_v1/"                           , 10, "2016_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M250_2017"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M250_2017_STEP6_v1/"                           , 10, "2017_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M250_2018"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M250_2018_STEP6_v1/"                           , 10, "2018_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M300_2016_APV"                                     	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M300_2016_APV_STEP6_v1/"                       , 10, "2016_APV_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M300_2016"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M300_2016_STEP6_v1/"                           , 10, "2016_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M300_2017"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M300_2017_STEP6_v1/"                           , 10, "2017_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M300_2018"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M300_2018_STEP6_v1/"                           , 10, "2018_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M320_2016_APV"                                    	 	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M320_2016_APV_STEP6_v1/"                       , 10, "2016_APV_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M320_2016"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M320_2016_STEP6_v1/"                           , 10, "2016_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M320_2017"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M320_2017_STEP6_v1/"                           , 10, "2017_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M320_2018"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M320_2018_STEP6_v1/"                           , 10, "2018_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M350_2016_APV"                                     	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M350_2016_APV_STEP6_v1/"                       , 10, "2016_APV_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M350_2016"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M350_2016_STEP6_v1/"                           , 10, "2016_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M350_2017"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M350_2017_STEP6_v1/"                           , 10, "2017_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M350_2018"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M350_2018_STEP6_v1/"                           , 10, "2018_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M400_2016_APV"                                    	 	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M400_2016_APV_STEP6_v1/"                       , 10, "2016_APV_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M400_2016"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M400_2016_STEP6_v1/"                           , 10, "2016_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M400_2017"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M400_2017_STEP6_v1/"                           , 10, "2017_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M400_2018"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M400_2018_STEP6_v1/"                           , 10, "2018_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M450_2016_APV"                                     	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M450_2016_APV_STEP6_v1/"                       , 10, "2016_APV_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M450_2016"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M450_2016_STEP6_v1/"                           , 10, "2016_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M450_2017"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M450_2017_STEP6_v1/"                           , 10, "2017_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M450_2018"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M450_2018_STEP6_v1/"                           , 10, "2018_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M500_2016_APV"                                    	 	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M500_2016_APV_STEP6_v1/"                       , 10, "2016_APV_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M500_2016"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M500_2016_STEP6_v1/"                           , 10, "2016_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M500_2017"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M500_2017_STEP6_v1/"                           , 10, "2017_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M500_2018"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M500_2018_STEP6_v1/"                           , 10, "2018_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M600_2016_APV"                                     	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M600_2016_APV_STEP6_v1/"                       , 10, "2016_APV_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M600_2016"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M600_2016_STEP6_v1/"                           , 10, "2016_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M600_2017"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M600_2017_STEP6_v1/"                           , 10, "2017_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M600_2018"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M600_2018_STEP6_v1/"                           , 10, "2018_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M800_2016_APV"                                    	 	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M800_2016_APV_STEP6_v1/"                       , 10, "2016_APV_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M800_2016"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M800_2016_STEP6_v1/"                           , 10, "2016_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M800_2017"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M800_2017_STEP6_v1/"                           , 10, "2017_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M800_2018"                                          	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M800_2018_STEP6_v1/"                           , 10, "2018_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M1000_2016_APV"                                     	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M1000_2016_APV_STEP6_v1/"                       , 10, "2016_APV_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M1000_2016"                                         	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M1000_2016_STEP6_v1/"                           , 10, "2016_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M1000_2017"                                         	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M1000_2017_STEP6_v1/"                           , 10, "2017_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M1000_2018"                                         	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M1000_2018_STEP6_v1/"                           , 10, "2018_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M2000_2016_APV"                                     	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M2000_2016_APV_STEP6_v1/"                       , 10, "2016_APV_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M2000_2016"                                         	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M2000_2016_STEP6_v1/"                           , 10, "2016_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M2000_2017"                                         	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M2000_2017_STEP6_v1/"                           , 10, "2017_MC"),
-    ("GluGluToBulkGravitonToHHTo2G2Tau_M2000_2018"                                         	, "/hadoop/cms/store/user/fsetti/nanoAOD_runII_20UL/GluGluToBulkGravitonToHHTo2G2Tau_M2000_2018_STEP6_v1/"                           , 10, "2018_MC"),
-
-    ("GluGluToHHTo2G2Tau_node_1_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV"     	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_1_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV_STEP6_v1/"  , 10, "2016_APV_MC"),
-    ("GluGluToHHTo2G2Tau_node_1_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_1_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_STEP6_v1/"  		, 10, "2016_MC"),
-    ("GluGluToHHTo2G2Tau_node_1_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_1_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017_STEP6_v1/"  		, 10, "2017_MC"),
-    ("GluGluToHHTo2G2Tau_node_1_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_1_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018_STEP6_v1/"  		, 10, "2018_MC"),
-    ("GluGluToHHTo2G2Tau_node_2_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV"     	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_2_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV_STEP6_v1/"  , 10, "2016_APV_MC"),
-    ("GluGluToHHTo2G2Tau_node_2_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_2_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_STEP6_v1/"  		, 10, "2016_MC"),
-    ("GluGluToHHTo2G2Tau_node_2_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_2_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017_STEP6_v1/"  		, 10, "2017_MC"),
-    ("GluGluToHHTo2G2Tau_node_2_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_2_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018_STEP6_v1/"  		, 10, "2018_MC"),
-    ("GluGluToHHTo2G2Tau_node_3_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV"     	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_3_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV_STEP6_v1/"  , 10, "2016_APV_MC"),
-    ("GluGluToHHTo2G2Tau_node_3_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_3_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_STEP6_v1/"  		, 10, "2016_MC"),
-    ("GluGluToHHTo2G2Tau_node_3_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_3_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017_STEP6_v1/"  		, 10, "2017_MC"),
-    ("GluGluToHHTo2G2Tau_node_3_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_3_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018_STEP6_v1/"  		, 10, "2018_MC"),
-    ("GluGluToHHTo2G2Tau_node_4_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV"     	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_4_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV_STEP6_v1/"  , 10, "2016_APV_MC"),
-    ("GluGluToHHTo2G2Tau_node_4_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_4_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_STEP6_v1/"  		, 10, "2016_MC"),
-    ("GluGluToHHTo2G2Tau_node_4_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_4_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017_STEP6_v1/"  		, 10, "2017_MC"),
-    ("GluGluToHHTo2G2Tau_node_4_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_4_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018_STEP6_v1/"  		, 10, "2018_MC"),
-    ("GluGluToHHTo2G2Tau_node_5_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV"     	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_5_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV_STEP6_v1/"  , 10, "2016_APV_MC"),
-    ("GluGluToHHTo2G2Tau_node_5_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_5_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_STEP6_v1/"  		, 10, "2016_MC"),
-    ("GluGluToHHTo2G2Tau_node_5_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_5_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017_STEP6_v1/"  		, 10, "2017_MC"),
-    ("GluGluToHHTo2G2Tau_node_5_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_5_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018_STEP6_v1/"  		, 10, "2018_MC"),
-    ("GluGluToHHTo2G2Tau_node_6_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV"     	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_6_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV_STEP6_v1/"  , 10, "2016_APV_MC"),
-    ("GluGluToHHTo2G2Tau_node_6_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_6_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_STEP6_v1/"  		, 10, "2016_MC"),
-    ("GluGluToHHTo2G2Tau_node_6_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_6_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017_STEP6_v1/"  		, 10, "2017_MC"),
-    ("GluGluToHHTo2G2Tau_node_6_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_6_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018_STEP6_v1/"  		, 10, "2018_MC"),
-    ("GluGluToHHTo2G2Tau_node_7_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV"     	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_7_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV_STEP6_v1/"  , 10, "2016_APV_MC"),
-    ("GluGluToHHTo2G2Tau_node_7_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_7_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_STEP6_v1/"  		, 10, "2016_MC"),
-    ("GluGluToHHTo2G2Tau_node_7_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_7_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017_STEP6_v1/"  		, 10, "2017_MC"),
-    ("GluGluToHHTo2G2Tau_node_7_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_7_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018_STEP6_v1/"  		, 10, "2018_MC"),
-    ("GluGluToHHTo2G2Tau_node_8_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV"     	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_8_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV_STEP6_v1/"  , 10, "2016_APV_MC"),
-    ("GluGluToHHTo2G2Tau_node_8_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_8_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_STEP6_v1/"  		, 10, "2016_MC"),
-    ("GluGluToHHTo2G2Tau_node_8_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_8_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017_STEP6_v1/"  		, 10, "2017_MC"),
-    ("GluGluToHHTo2G2Tau_node_8_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_8_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018_STEP6_v1/"  		, 10, "2018_MC"),
-    ("GluGluToHHTo2G2Tau_node_9_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV"     	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_9_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV_STEP6_v1/"  , 10, "2016_APV_MC"),
-    ("GluGluToHHTo2G2Tau_node_9_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_9_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_STEP6_v1/"  		, 10, "2016_MC"),
-    ("GluGluToHHTo2G2Tau_node_9_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_9_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017_STEP6_v1/"  		, 10, "2017_MC"),
-    ("GluGluToHHTo2G2Tau_node_9_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_9_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018_STEP6_v1/"  		, 10, "2018_MC"),
-    ("GluGluToHHTo2G2Tau_node_10_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV"     	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_10_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV_STEP6_v1/"  , 10, "2016_APV_MC"),
-    ("GluGluToHHTo2G2Tau_node_10_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_10_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_STEP6_v1/"  		, 10, "2016_MC"),
-    ("GluGluToHHTo2G2Tau_node_10_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_10_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017_STEP6_v1/"  		, 10, "2017_MC"),
-    ("GluGluToHHTo2G2Tau_node_10_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_10_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018_STEP6_v1/"  		, 10, "2018_MC"),
-    ("GluGluToHHTo2G2Tau_node_11_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV"     	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_11_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV_STEP6_v1/"  , 10, "2016_APV_MC"),
-    ("GluGluToHHTo2G2Tau_node_11_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_11_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_STEP6_v1/"  		, 10, "2016_MC"),
-    ("GluGluToHHTo2G2Tau_node_11_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_11_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017_STEP6_v1/"  		, 10, "2017_MC"),
-    ("GluGluToHHTo2G2Tau_node_11_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_11_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018_STEP6_v1/"  		, 10, "2018_MC"),
-    ("GluGluToHHTo2G2Tau_node_12_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV"     	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_12_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_APV_STEP6_v1/"  , 10, "2016_APV_MC"),
-    ("GluGluToHHTo2G2Tau_node_12_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_12_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2016_STEP6_v1/"  		, 10, "2016_MC"),
-    ("GluGluToHHTo2G2Tau_node_12_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_12_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2017_STEP6_v1/"  		, 10, "2017_MC"),
-    ("GluGluToHHTo2G2Tau_node_12_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018"         	, "/hadoop/cms/store/user/hmei/miniAOD_runII_20UL/GluGluToHHTo2G2Tau_node_12_TuneCP5_PSWeights_13TeV-madgraph-pythia8_2018_STEP6_v1/"  		, 10, "2018_MC"),
-]
+from dsdefs_localminiaod_UL import dsdefs_signal
 
 # some job configurations
 job_dir = "Summer20UL_nanoAODv9/"
 job_tag = args.tag
 job_filter = args.filter
 ds_filter = args.dsfilter
-skip_central = args.skip_central
-hadoop_path = "{0}".format(job_dir)
+ceph_path = "{0}".format(job_dir)
 
 cmssw_ver = "CMSSW_10_6_26"
 
 DOSKIM = False 
 
 #exec_path = "condor_exe_%s.sh" % args.tag
-exec_path = "condor_exe.sh"
+exec_path = "condor_exe_ceph.sh"
 #tar_path = "nanoAOD_package_%s.tar.gz" % args.tag
 
 if not args.soft_rerun:
-#    os.system("rm -rf tasks/*" + args.tag + "*")
-    os.system("rm package.tar.gz")
-    os.system("XZ_OPT='-3e -T24' tar -Jc --exclude='.git' --exclude='*.root' --exclude='*.tar*' --exclude='*.out' --exclude='*.err' --exclude='*.log' --exclude '*.nfs*' -f package.tar.gz %s" % cmssw_ver)
+    os.system("rm no_fixedGridRho_CMSSW/package.tar.gz")
+    os.system(" cd no_fixedGridRho_CMSSW; XZ_OPT='-3e -T24' tar -Jc --exclude='.git' --exclude='*.root' --exclude='*.tar*' --exclude='*.out' --exclude='*.err' --exclude='*.log' --exclude '*.nfs*' -f package.tar.gz %s; cd .." % cmssw_ver)
 
 total_summary = {}
 while True:
     allcomplete = True
 
     # Loop through local samples
-    for ds,loc,fpo,args in local_sets[:]:
+    for ds,loc,fpo,args in dsdefs_signal[:]:
         sample = DirectorySample( dataset = ds, location = loc )
         files = [f.name for f in sample.get_files()]
         print "For sample %s in directory %s, there are %d input files" % (ds, loc, len(files))
@@ -218,10 +54,10 @@ while True:
                 tag = job_tag,
                 cmssw_version = cmssw_ver,
                 executable = exec_path,
-                tarfile = "./package.tar.gz",
+                tarfile = "no_fixedGridRho_CMSSW/package.tar.gz",
                 condor_submit_params = {"sites": "T2_US_UCSD,T2_US_CALTECH,T2_US_WISCONSIN,T2_US_Florida", # other_sites can be good_sites, your own list, etc.
                     "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel7-m202006"]]},
-                special_dir = hadoop_path,
+                special_dir = ceph_path,
                 arguments = args.replace(" ","|")
         )
         task.process()
@@ -240,6 +76,6 @@ while True:
         print "Job={} finished".format(job_tag)
         print ""
         break
-    sleep_time	= 2 * 60 * 60
+    sleep_time	= 1 * 60 * 60
     print "Sleeping " + str(sleep_time / 60) + " minutes ..."
     time.sleep(sleep_time)

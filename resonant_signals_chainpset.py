@@ -35,20 +35,22 @@ condor_submit_params={
 
 #condor_submit_params = {"sites" : "T2_US_UCSD,T2_US_CALTECH,T2_US_MIT,T2_US_WISCONSIN,T2_US_Nebraska,T2_US_Purdue,T2_US_Vanderbilt,T2_US_Florida",
 
-#graviton_masses = [ '250', '300', '320', '350', '400', '450', '500', '800', '1000', '2000'  ]
-graviton_masses = [ '250', '300', '320', '350', '400', '450' ]
+graviton_masses = [ '250', '300', '320', '350', '400', '450', '500', '800', '1000', '2000'  ]
+#graviton_masses = [ '250', '300', '320', '350', '400', '450' ]		#uaf-8
 #radion_masses	= [ '260', '270', '280', '290', '300', '350', '400', '500', '700', '1000' ]
 #radion_masses	= [ '260']
 def runall(special_dir, total_nevents, events_per_output):
 
 	for _ in range(2500):
 
-		proc_tag = "v2"
+		proc_tag = "v0"
 
 		#Produce resonant samples for IC people
 		for proc in resonant_signals.keys() :
+
 			if "Graviton" not in proc:
 				continue
+
 			for year in years:
 				for mass in graviton_masses:
 
@@ -232,7 +234,8 @@ def runall(special_dir, total_nevents, events_per_output):
 					StatsParser(data=total_summary, webdir="~/public_html/dump/metis_miniAODv2/").do()     
 
 		time.sleep( 90 * 60 )
+		#time.sleep( 5 * 60 )
 
 
-runall("nanoAOD_runII_20UL", 400000, 250)
-#runall("nanoAOD_runII_20UL_test", 5, 5)
+runall("miniAOD_runII_20UL", 400000, 250)
+#runall("miniAOD_runII_20UL_test", 5, 5)

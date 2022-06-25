@@ -51,7 +51,7 @@ def runall(special_dir, total_nevents, events_per_output):
 				try:
 					cmssw_v_gen = EFT_benchmarks[year]["cmssw_v_gen"] 
 					pset_gen = EFT_benchmarks[year]["pset_gen"]
-					pset_gen.replace('_1_cfg.py','_1_cfg_HH_%s.py'%(eft_bm))
+					pset_gen = pset_gen.replace('_1_cfg.py','_1_cfg_HH_%s.py'%(eft_bm))
 					scram_arch_gen = EFT_benchmarks[year]["scram_arch_gen"]
 
 					edit_pset_EFT( str('HH_'+eft_bm), 'HH_1' , year  )	

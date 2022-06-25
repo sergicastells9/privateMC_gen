@@ -1,6 +1,5 @@
 # Auto generated configuration file
 # using: 
-# Revision: 1.19 
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
 # with command line options: RECO --conditions 106X_dataRun2_v35 --customise Configuration/DataProcessing/Utils.addMonitoring --datatier NANOAOD --era Run2_2016,run2_nanoAOD_106Xv2 --eventcontent NANOEDMAOD --filein _placeholder_.root --fileout file:ReReco-Run2016E-SingleMuon-HIPM_UL2016_MiniAODv2_JMENanoAODv9-00001.root --nThreads 2 --no_exec --python_filename ReReco-Run2016E-SingleMuon-HIPM_UL2016_MiniAODv2_JMENanoAODv9-00001_0_cfg.py --scenario pp --step NANO --data --customise_commands=process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False))) \n from PhysicsTools.NanoAOD.custom_jme_cff import PrepJMECustomNanoAOD_Data; PrepJMECustomNanoAOD_Data(process)\n
 import FWCore.ParameterSet.Config as cms

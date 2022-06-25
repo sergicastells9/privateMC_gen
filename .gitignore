@@ -1,11 +1,13 @@
 CMSSW_*
 *.json
 *.root
+.nfs*
 tasks/
 test/
 example/
 gridpacks/
 mergedNanoAOD/
+old_CMSSW/
 *tar.gz
 *.log
 *pyc

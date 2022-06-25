@@ -28,8 +28,8 @@ condor_submit_params={
 #condor_submit_params = {"sites" : "T2_US_UCSD,T2_US_CALTECH,T2_US_MIT,T2_US_WISCONSIN,T2_US_Nebraska,T2_US_Purdue,T2_US_Vanderbilt,T2_US_Florida",
 
 #couplings = [ 'cHHH0' , 'cHHH1' , 'cHHH2p45' , 'cHHH5' ]
-couplings = [ 'cHHH2p45' , 'cHHH5']
-#decays = [ 'dileptonic' ]
+couplings = [ 'cHHH0' , 'cHHH1' ]					#####################uaf-8
+#couplings = [ 'cHHH2p45' , 'cHHH5' ]				#####################uaf-10 or uaf-1?
 decays = [ 'dileptonic' , 'semileptonic' ]
 
 def runall(special_dir, total_nevents, events_per_output):
@@ -253,10 +253,6 @@ def runall(special_dir, total_nevents, events_per_output):
 					edit_pset_gghh_WW( coupling, 'cHHH1' , year, decay  )	
 
 					tag = 'GluGluToHHTo2G2W_' + decay + '_node_' + str(coupling) + '_'+ year
-					#if coupling == 'cHHH1':
-					#	tag = 'GluGluToHHTo2G2W_' + decay + '_node_SM_'+ year
-					#else :
-					#	tag = 'GluGluToHHTo2G2W_' + decay + '_node_' + str(coupling) + '_'+ year
 					
 					total_nevents_tmp = total_nevents
 					
@@ -281,7 +277,6 @@ def runall(special_dir, total_nevents, events_per_output):
 					        cmssw_version = cmssw_v_gen,
 					        scram_arch = scram_arch_gen,
 					        condor_submit_params =  condor_submit_params,
-									#use_hadoop = True
 					       )
 					
 					step2 = CMSSWTask(
@@ -297,7 +292,6 @@ def runall(special_dir, total_nevents, events_per_output):
 					        cmssw_version = cmssw_v_sim,
 					        scram_arch = scram_arch_sim,
 					        condor_submit_params =  condor_submit_params,
-									#use_hadoop = True
 					        )
 					
 					step3 = CMSSWTask(
@@ -313,7 +307,6 @@ def runall(special_dir, total_nevents, events_per_output):
 					        cmssw_version = cmssw_v_mix,
 					        scram_arch = scram_arch_mix,
 					        condor_submit_params =  condor_submit_params,
-									#use_hadoop = True
 					        )
 					
 					step4 = CMSSWTask(
@@ -331,7 +324,6 @@ def runall(special_dir, total_nevents, events_per_output):
 					        cmssw_version = cmssw_v_hlt,
 					        scram_arch = scram_arch_hlt,
 					        condor_submit_params =  condor_submit_params,
-									#use_hadoop = True
 					        )
 					
 					step5 = CMSSWTask(
@@ -348,7 +340,6 @@ def runall(special_dir, total_nevents, events_per_output):
 					        cmssw_version = cmssw_v_reco,
 					        scram_arch = scram_arch_reco,
 					        condor_submit_params =  condor_submit_params,
-									#use_hadoop = True
 					        )
 					
 					step6 = CMSSWTask(
@@ -366,7 +357,6 @@ def runall(special_dir, total_nevents, events_per_output):
 					        cmssw_version = cmssw_v_miniaodsim,
 					        scram_arch = scram_arch_miniaodsim,
 					        condor_submit_params =  condor_submit_params,
-									#use_hadoop = True
 					        )
 					'''
 					step7 = CMSSWTask(
