@@ -17,12 +17,12 @@ parser.add_argument("--skip_local", help = "don't submit jobs for local samples"
 parser.add_argument("--skip_central", help = "don't submit jobs for central samples", action = "store_true")
 args = parser.parse_args()
 
-from dsdefs_centralminiaod_UL import dsdefs_data, dsdefs_MC_latest
+from dsdefs_centralminiaod_UL import dsdefs_h4g
 # for local inputs
 local_sets = []
 
 # some job configurations
-job_dir = "Summer20UL_nanoAODv9_fixRho/"
+job_dir = "test/"
 job_tag = args.tag
 job_filter = args.filter
 ds_filter = args.dsfilter
@@ -47,7 +47,7 @@ while True:
     allcomplete = True
 
     # Loop through central samples
-    for ds,fpo,args in dsdefs_MC_latest[:] :
+    for ds,fpo,args in dsdefs_h4g[:] :
         if skip_central: continue
         if (job_filter != "") and (args not in job_filter) : continue         
         if (ds_filter != "") and (ds_filter not in ds) : continue         
@@ -87,6 +87,6 @@ while True:
         print "Job={} finished".format(job_tag)
         print ""
         break
-    sleep_time	= 90 * 60
+    sleep_time	= 2 * 60 ## CHANGE THIS BACK TO 90*60
     print "Sleeping " + str(sleep_time / 60) + " minutes ..."
     time.sleep(sleep_time)
