@@ -33,8 +33,8 @@ cmssw_ver = "CMSSW_10_6_26"
 
 DOSKIM = False 
 
-#exec_path = "condor_exe_%s.sh" % args.tag
-exec_path = "condor_exe_ceph.sh"
+exec_path = "condor_exe_%s.sh" % args.tag
+#exec_path = "condor_exe_ceph.sh"
 #tar_path = "nanoAOD_package_%s.tar.gz" % args.tag
 
 if not args.soft_rerun:
@@ -63,7 +63,7 @@ while True:
 								cmssw_version = cmssw_ver,
                 executable = exec_path,
                 tarfile = "./package.tar.gz",
-                condor_submit_params = {"sites": "T2_US_UCSD,T2_US_CALTECH,T2_US_WISCONSIN,T2_US_Vanderbilt,T2_US_Florida", # other_sites can be good_sites, your own list, etc.
+                condor_submit_params = {"sites": "T3_US_NotreDame", # other_sites can be good_sites, your own list, etc.
                     "classads": [["SingularityImage","/cvmfs/singularity.opensciencegrid.org/cmssw/cms:rhel7-m202006"]],
 										"use_xrootd":True
 								},
@@ -87,6 +87,6 @@ while True:
         print "Job={} finished".format(job_tag)
         print ""
         break
-    sleep_time	= 2 * 60 ## CHANGE THIS BACK TO 90*60
+    sleep_time	= 90 * 60 ## CHANGE THIS BACK TO 90*60
     print "Sleeping " + str(sleep_time / 60) + " minutes ..."
     time.sleep(sleep_time)
