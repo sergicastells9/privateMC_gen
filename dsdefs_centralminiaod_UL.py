@@ -1,4 +1,4 @@
-fpo = 1
+fpo = 10
 dsdefs_h4g = [
         # 2016MC_signal
         ("/HAHMHToAA_AToGG_MA-15GeV_TuneCUETP8M1_PSweights_13TeV-madgraph_pythia8/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM", fpo, "2016MC"),
