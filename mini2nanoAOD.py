@@ -33,8 +33,8 @@ cmssw_ver = "CMSSW_10_6_26"
 
 DOSKIM = False 
 
-exec_path = "condor_exe_%s.sh" % args.tag
-#exec_path = "condor_exe_ceph.sh"
+#exec_path = "condor_exe_%s.sh" % args.tag
+exec_path = "condor_exe_hadoop.sh"
 #tar_path = "nanoAOD_package_%s.tar.gz" % args.tag
 
 if not args.soft_rerun:
